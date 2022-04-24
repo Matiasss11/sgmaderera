@@ -37,6 +37,7 @@
     <ul class="navbar-nav ml-auto">
       
       {{-- Cerrar Sesion --}}
+      {{-- Reever ruta logout --}}
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ route('logout') }}" class="nav-link">
                 <i class="fas fa-sign-out-alt"onclick="event.preventDefault();
