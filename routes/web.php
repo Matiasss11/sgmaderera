@@ -20,11 +20,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function() {
     
     include 'rutas/Audit.php';
+    include 'rutas/Configuracion.php';
+    include 'rutas/Estadistica.php';
     include 'rutas/Roles.php';
     include 'rutas/User.php';
     
