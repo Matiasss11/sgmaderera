@@ -41,7 +41,13 @@ class ProductoController extends Controller
             $request["imagen"] =  ProductoService::saveImage($request->file('productoImage'));
         }
 
+        //Caracteristicas
+        $request["caracteristicas"] = ProductoService::getStringCaracteristicas($request->arrayCaracteristicas);
+
         $producto = Producto::create($request->all());
+
+        //Sync relaciones de categorías
+        $producto->categorias()->sync($request->categorias);
 
         return redirect()->route('productos.index')
             ->with('success', 'Producto created successfully.');
@@ -55,7 +61,8 @@ class ProductoController extends Controller
 
         //Convertir en array para obtener las categorias del producto
         $array = json_decode( json_encode( $producto->categorias ), true );
-        //obtener el arrays de ids de categorias del producto
+        
+        //Obtener el arrays de ids de categorias del producto
         $categoriasDelProducto = array_column($array, "id");
 
         $caracteristicas = ProductoService::getArrayCaracteristicas($producto->caracteristicas);
