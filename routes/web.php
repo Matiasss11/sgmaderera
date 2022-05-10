@@ -29,11 +29,9 @@ Route::middleware(['auth'])->group(function() {
     include 'rutas/Audit.php';
     include 'rutas/Configuracion.php';
     include 'rutas/Estadistica.php';
+    include 'rutas/Productos.php';
     include 'rutas/Roles.php';
     include 'rutas/User.php';
     
 });
 
-Route::resource('productos', ProductoController::class, ['except' => ['show']]);
-Route::get('productos-stock', [ProductoController::class, 'stock'])->name('producto.stock');
-Route::get('productos-precios', [ProductoController::class, 'precios'])->name('producto.precios');

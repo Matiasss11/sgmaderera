@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
-
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Daterange picker -->
@@ -63,128 +62,6 @@
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-blue navbar-light">
             <ul class="navbar-nav">
-
-
-  <!-- Select 2 -->
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-</head>
-<!--
-`body` tag options:
-
-  Apply one or more of the following classes to to the body tag
-  to get the desired effect
-
-  * sidebar-collapse
-  * sidebar-mini
--->
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-    </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      
-      {{-- Cerrar Sesion --}}
-      {{-- Reever ruta logout --}}
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('logout') }}" class="nav-link">
-                <i class="fas fa-sign-out-alt"onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();"></i> Cerrar sesión
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        </li>
-        
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Maderas Ecke</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-    <nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-header">EXAMPLES</li>
-        <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-                <i class="nav-icon fas fa-calendar-alt"></i>
-                <p>
-                Calendar
-                <span class="badge badge-info right">2</span>
-                </p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="{{route("productos.index")}}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>
-                    Productos
-                </p>
-            </a>
-        </li>
-        <!-- 
-            <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-                <i class="nav-icon far fa-image"></i>
-                <p>
-                Gallery
-                </p>
-            </a>
-            </li>
-            <li class="nav-item">
-            <a href="pages/kanban.html" class="nav-link">
-                <i class="nav-icon fas fa-columns"></i>
-                <p>
-                Kanban Board
-                </p>
-            </a>
-            </li>
-            <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon far fa-envelope"></i>
-                <p>
-                Mailbox
-                <i class="fas fa-angle-left right"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Inbox</p>
-                </a>
-                </li>
-                <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Compose</p>
-                </a>
-                </li>
->>>>>>> dev
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
@@ -236,6 +113,15 @@
                                 </a>
                             </li>
                         {{-- @endcan --}}
+
+                        <li class="nav-item">
+                            <a href="{{route("productos.index")}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Productos
+                                </p>
+                            </a>
+                        </li>
                 
                         {{-- @can('listar usuarios') --}}
                         <li class="nav-item">
@@ -375,22 +261,7 @@
     <!-- mascaras -->
     <script src="{{asset('js/jquery.mask.min.js')}}"></script>
 
-
     @stack('scripts')
     @yield("scripts")
-
-<!-- OPTIONAL SCRIPTS -->
-<script src="{{ asset('plugins/chart.js/Chart.min.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('dist/js/demo.js')}}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('dist/js/pages/dashboard3.js')}}"></script>
-
-  <!-- Select 2 -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-@yield('scripts')
-
-
 </body>
 </html>
