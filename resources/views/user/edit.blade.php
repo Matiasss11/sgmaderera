@@ -46,25 +46,19 @@
                         {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control', 'required'=>true)) !!}
                     </div>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Rol:</strong>
+                        {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <div class="card card-dark">
             <div class="card-body">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group" >
-                        <strong>Lista de Roles</strong>
-                        <br><br>
-                            @foreach ($roles as $role)
-                                <label>
-                                    {{ Form::checkbox('roles[]', $role->id, null) }}
-                                    {{ $role->name }}
-                                </label>
-                                <br>
-                            @endforeach
-                    </div>
-                </div>
+                
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group" style="text-align:center">

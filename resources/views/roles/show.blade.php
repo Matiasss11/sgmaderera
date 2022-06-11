@@ -9,7 +9,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="">
-                <h3 class="modal-title" style="color: black"><i style="color: black" class="fa fa-exclamation-triangle" aria-hidden="true"></i> Detalle deL rol {{ $role->id }}</h3>
+                <h3 class="modal-title" style="color: black"><i style="color: black" class="fa fa-exclamation-triangle" aria-hidden="true"></i> Detalle del rol {{ $role->id }}</h3>
                 <div class="modal-body">
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
