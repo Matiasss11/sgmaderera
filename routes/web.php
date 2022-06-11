@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function() {
     
     include 'rutas/Audit.php';
     include 'rutas/Configuracion.php';
+    include 'rutas/Empresa.php';
     include 'rutas/Estadistica.php';
     include 'rutas/Productos.php';
     include 'rutas/Roles.php';
