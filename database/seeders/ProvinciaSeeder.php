@@ -1,7 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\Provincia;
+use App\Models\Sistema\Provincia;
 class ProvinciaSeeder extends Seeder
 {
     /**

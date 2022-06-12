@@ -1,7 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\Pais;
+use App\Models\Sistema\Pais;
 class PaisSeeder extends Seeder
 {
     /**
@@ -12,7 +14,5 @@ class PaisSeeder extends Seeder
     public function run()
     {
         Pais::create(['nombre'=>'Argentina']);
-        Pais::create(['nombre'=>'Brasil']);
-
     }
 }

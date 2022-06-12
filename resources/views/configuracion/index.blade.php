@@ -29,7 +29,7 @@
                                     <div class="icon">
                                         <i class="fas fa-industry"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">
+                                    <a href="{{ route('empresas.index') }}" class="small-box-footer">
                                         Más Información <i class="fas fa-arrow-circle-right"></i>
                                     </a>
                                 </div>
@@ -75,7 +75,7 @@
                                     <div class="icon">
                                         <i class="fas fa-globe-americas"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">
+                                    <a href="{{ route('pais.index') }}" class="small-box-footer">
                                         Más Información <i class="fas fa-arrow-circle-right"></i>
                                     </a>
                                 </div>
@@ -89,7 +89,7 @@
                                     <div class="icon">
                                         <i class="fas fa-map-marker"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">
+                                    <a href="{{ route('provincia.index') }}" class="small-box-footer">
                                         Más Información <i class="fas fa-arrow-circle-right"></i>
                                     </a>
                                 </div>
@@ -103,7 +103,7 @@
                                     <div class="icon">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">
+                                    <a href="{{ route('ciudad.index') }}" class="small-box-footer">
                                         Más Información <i class="fas fa-arrow-circle-right"></i>
                                     </a>
                                 </div>

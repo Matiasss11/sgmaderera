@@ -1,7 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\Ciudad;
+use App\Models\Sistema\Ciudad;
 
 class CiudadSeeder extends Seeder
 {

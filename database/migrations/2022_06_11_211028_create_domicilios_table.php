@@ -15,6 +15,11 @@ class CreateDomiciliosTable extends Migration
     {
         Schema::create('domicilios', function (Blueprint $table) {
             $table->id();
+            $table->string('piso')->nullable();
+            $table->string('departamento')->nullable();
+            $table->string('direccion');
+            $table->unsignedBigInteger('ciudad_id');
+            $table->foreign('ciudad_id')->references('id')->on('ciudades')->onDelete('restrict');
             $table->timestamps();
         });
     }
