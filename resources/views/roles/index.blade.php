@@ -20,13 +20,13 @@
                     
                 </div>
                 <div class="col-2">
-                    @can('crear rol')
+                    {{-- @can('crear rol') --}}
                     <a href= {{ route('roles.create')}}>
                         <button class="btn btn-primary">
                             <i class="fas fa-plus"></i> Nuevo
                         </button>
                     </a>
-                    @endcan
+                    {{-- @endcan --}}
                 </div>
             </div>
             
@@ -48,7 +48,7 @@
                         <td style="text-align: center" colspan="3">
 
                             @can('editar rol')
-                            <a href="{{URL::action('RoleController@edit',$role->id)}}">
+                            <a href="{{ route('roles.edit',$role->id) }}">
                                 <button title="editar" class="btn btn-primary btn-responsive">
                                     <i class="fa fa-edit"></i>
                                 </button>
@@ -62,6 +62,7 @@
                             </a>
                             @endcan
                         </td>
+                        @include('roles.modaldelete')
                     </tr>
                     @endforeach
                 </tbody>

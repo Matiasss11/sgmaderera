@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(1)->create(["email" => "admin@gmail.com"]);
+        $this->call(PermissionTableSeeder::class);
+        $this->call(CreateAdminUserSeeder::class);
+        $this->call(PaisSeeder::class);
+        $this->call(ProvinciaSeeder::class);
+        $this->call(CiudadSeeder::class);
     }
 }

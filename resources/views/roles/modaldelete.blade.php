@@ -5,13 +5,11 @@
      aria-hidden="true"
      role="dialog"
      tabindex="-1"
-     id="modal-delete-{{$user->id}}">
+     id="modal-delete-{{$role->id}}">
 
-
-     {{Form::Open(array(
-        'action'=>array('UserController@destroy',$user->id),
-        'method'=>'delete'
-        ))}}
+     <form method="POST" action="{{route('roles.destroy', $role->id)}}" style="display: inline;">
+      {{ csrf_field() }}
+      {{ method_field('DELETE') }}
 
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -20,7 +18,7 @@
                
               </div>
               <div class="modal-body" style="color: black">
-                <p style="font-size:120%">¿Desea dar de baja a la siguiente persona <b>{{$user->apellido}}</b>?</p>
+                <p style="font-size:120%">¿Desea dar de baja al siguiente rol <b>{{$role->name}}</b>?</p>
               </div>
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Confirmar</button>
@@ -33,8 +31,8 @@
           </div>
 
 
-          {{Form::Close()}}
-
+          
+    </form>
 
 </div>
 
