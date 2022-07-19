@@ -7,7 +7,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form action="{{route("producto.precios", $producto->id)}}" method="GET" role="form">
+            <form action="{{route("producto.precios")}}" method="GET" role="form">
                 @csrf
                 @method("GET")
                 <div class="modal-body">
