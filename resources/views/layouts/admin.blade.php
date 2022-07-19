@@ -30,10 +30,9 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
   @yield("style")
   <!-- Select2 -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" /></head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" /></head>
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
   <!--style>
       .sidebar-dark-info{
         background: #138496 !important;
@@ -42,22 +41,24 @@
         background: #138496 !important;
       }
  </style-->
- <style>
-      .sidebar-dark-blue{
-        background: rgb(116, 29, 29) !important;
-      }
-      .navbar-blue {
-        background: rgb(116, 29, 29) !important;
-      }
-      /* Este es para los elementos en general */
-    .navbar-light .navbar-nav .nav-link {
-    color: #ffffff !important;
-    }
-    /*  Este es para el elemento activo lo puedes omitir si asi deseas */
-    .navbar-light .navbar-nav .active>.nav-link  {
-    color: red !important;
-    }
- </style>
+    <style>
+        .sidebar-dark-blue{
+            background: rgb(116, 29, 29) !important;
+        }
+        .navbar-blue {
+            background: rgb(116, 29, 29) !important;
+        }
+        /* Este es para los elementos en general */
+        .navbar-light .navbar-nav .nav-link {
+        color: #ffffff !important;
+        }
+        /*  Este es para el elemento activo lo puedes omitir si asi deseas */
+        .navbar-light .navbar-nav .active>.nav-link  {
+        color: red !important;
+        }
+    </style>
+    @livewireStyles
+ </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-blue navbar-light">
@@ -263,5 +264,7 @@
 
     @stack('scripts')
     @yield("scripts")
+
+    @livewireScripts
 </body>
 </html>
