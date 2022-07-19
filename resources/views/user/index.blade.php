@@ -3,7 +3,10 @@
 @section('navegacion')
     <li class="breadcrumb-item"><a href="/">Menu Principal</a></li>
     <li class="breadcrumb-item active">Indice de Usuarios</li>
+    @can('listar roles')
     <li class="breadcrumb-item"><a href="/roles">Roles</a></li>
+    @endcan
+    
 @endsection
 
 @section('content')

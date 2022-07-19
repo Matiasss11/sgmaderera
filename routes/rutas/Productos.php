@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductoController;
 
 Route::resource('productos', ProductoController::class, ['except' => ['show']]);
 Route::get('productos-stock', [ProductoController::class, 'stock'])->name('producto.stock');
