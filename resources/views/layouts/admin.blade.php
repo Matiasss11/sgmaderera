@@ -115,6 +115,7 @@
                             </li>
                         {{-- @endcan --}}
 
+                        {{-- @can('listar productos') --}}
                         <li class="nav-item">
                             <a href="{{route("productos.index")}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -123,6 +124,29 @@
                                 </p>
                             </a>
                         </li>
+                        {{-- @endcan --}}
+
+                        {{-- @can('listar presupuestos') --}}
+                        <li class="nav-item">
+                            <a href="{{route("presupuestos.index")}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Presupuestos
+                                </p>
+                            </a>
+                        </li>
+                        {{-- @endcan --}}
+
+                        {{-- @can('listar ventas') --}}
+                        <li class="nav-item">
+                            <a href="{{route("ventas.index")}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Ventas
+                                </p>
+                            </a>
+                        </li>
+                        {{-- @endcan --}}
                 
                         {{-- @can('listar usuarios') --}}
                         <li class="nav-item">
@@ -132,6 +156,7 @@
                             </a>
                         </li>
                         {{-- @endcan --}}
+
                         {{-- @role('Administrador') --}}
                         <li class="nav-header">SISTEMA</li>
                         <li class="nav-item">

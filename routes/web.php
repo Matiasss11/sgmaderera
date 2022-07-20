@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function() {
     include 'rutas/Provincias.php';
     include 'rutas/Roles.php';
     include 'rutas/User.php';
+    include 'rutas/Ventas.php';
     
 });
 
