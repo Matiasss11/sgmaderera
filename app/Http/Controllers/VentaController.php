@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ElementosDeLista;
+use App\Models\ListaDeProducto;
+use App\Models\Presupuesto;
 use App\Models\Venta;
 use Illuminate\Http\Request;
 
@@ -59,9 +62,30 @@ class VentaController extends Controller
      */
     public function show($id)
     {
+        $elementos = [];
+        $precio_total = 0;
         $venta = Venta::find($id);
+        $presupuesto = Presupuesto::where('venta_id', $id)->first();
+        $lista = ListaDeProducto::where('presupuesto_id', $presupuesto->id)->first();
+        $array = ElementosDeLista::leftJoin('productos','productos.id', 'elementos_de_lista.producto_id')
+                                            ->where('lista_id', $lista->id)
+                                            ->select('elementos_de_lista.*', 
+                                                    'productos.nombre as nombre',
+                                                    'productos.precio_base as precio_base')
+                                            ->get();
+        foreach ($array as $item) {
+            $elementos[] = [
+                                    'cantidad' => $item->cantidad, 
+                                    'producto_id' => $item->producto_id, 
+                                    'nombre' => $item->nombre,
+                                    'precio_unitario' => $item->precio_base,
+                                    'precio' => $item->precio_base * $item->cantidad
+                                ];
+            $precio_total += $item->precio_base * $item->cantidad;
+        }
 
-        return view('venta.show', compact('venta'));
+
+        return view('venta.show', compact('venta', 'elementos', 'precio_total'));
     }
 
     /**

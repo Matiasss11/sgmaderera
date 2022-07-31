@@ -15,13 +15,15 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class ElementosDeListum extends Model
+class ElementosDeLista extends Model
 {
     
     static $rules = [
     ];
 
     protected $perPage = 20;
+    protected $table = 'elementos_de_lista';
+    public $timestamps = false;
 
     /**
      * Attributes that should be mass-assignable.

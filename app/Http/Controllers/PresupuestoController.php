@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ElementosDeLista;
+use App\Models\ListaDeProducto;
 use App\Models\Presupuesto;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,8 @@ class PresupuestoController extends Controller
      */
     public function index()
     {
-        $presupuestos = Presupuesto::paginate();
+        $presupuestos = Presupuesto::where('venta_id', null)
+                            ->paginate();
 
         return view('presupuesto.index', compact('presupuestos'))
             ->with('i', (request()->input('page', 1) - 1) * $presupuestos->perPage());
@@ -101,7 +104,10 @@ class PresupuestoController extends Controller
      */
     public function destroy($id)
     {
-        $presupuesto = Presupuesto::find($id)->delete();
+        $lista = ListaDeProducto::where('presupuesto_id',$id)->first();
+        ElementosDeLista::where('lista_id', $lista->id)->delete();
+        ListaDeProducto::find($lista->id)->delete();
+        Presupuesto::find($id)->delete();
 
         return redirect()->route('presupuestos.index')
             ->with('success', 'Presupuesto deleted successfully');

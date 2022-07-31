@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('template_title')
-    {{ $presupuesto->name ?? 'Show Presupuesto' }}
-@endsection
+@extends('layouts.admin')
 
 @section('content')
     <section class="content container-fluid">

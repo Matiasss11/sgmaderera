@@ -1,6 +1,5 @@
 <div class="box box-info padding-1">
-    <div class="box-body">
-        
+    {{-- <div class="box-body">
         <div class="form-group">
             {{ Form::label('cliente_id') }}
             {{ Form::text('cliente_id', $presupuesto->cliente_id, ['class' => 'form-control' . ($errors->has('cliente_id') ? ' is-invalid' : ''), 'placeholder' => 'Cliente Id']) }}
@@ -11,9 +10,12 @@
             {{ Form::text('venta_id', $presupuesto->venta_id, ['class' => 'form-control' . ($errors->has('venta_id') ? ' is-invalid' : ''), 'placeholder' => 'Venta Id']) }}
             {!! $errors->first('venta_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+    </div> --}}
 
-    </div>
-    <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+    @if ($presupuesto->id)
+        @livewire('lista-de-productos', ['presupuesto_id' => $presupuesto->id])
+    @else
+        @livewire('lista-de-productos')
+    @endif
+    
 </div>

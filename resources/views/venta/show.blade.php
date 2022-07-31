@@ -15,15 +15,30 @@
                     </div>
 
                     <div class="card-body">
-                        
-                        <div class="form-group">
-                            <strong>User Id:</strong>
-                            {{ $venta->user_id }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Fecha De Retiro:</strong>
-                            {{ $venta->fecha_de_retiro }}
-                        </div>
+                    <table class="table table-striped table-hover">
+                        <thead class="thead">
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio unitario</th>
+                                <th>Precio total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($elementos as $elemento)
+                                <tr>
+                                    <td>{{ $elemento['nombre'] }}</td>
+                                    <td>{{ $elemento['cantidad'] }}</td>
+                                    <td>${{ number_format($elemento['precio_unitario'], 2, '.', ',')}}</td>
+                                    <td>${{ number_format($elemento['precio'], 2, '.', ',')}}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td colspan="3">Total</td>
+                                <td colspan="1" class="bg-warning">${{ number_format($precio_total, 2, '.', ',')}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                     </div>
                 </div>

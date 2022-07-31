@@ -31,24 +31,20 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Cliente Id</th>
-										<th>Venta Id</th>
-
-                                        <th></th>
+										<th>Cliente</th>
+										<th>Fecha</th>
+                                        <th>Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($presupuestos as $presupuesto)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $presupuesto->cliente_id }}</td>
-											<td>{{ $presupuesto->venta_id }}</td>
-
+                                            <td>{{ $presupuesto->id }}</td>
+											<td>Pendiente</td>
+											<td>{{ $presupuesto->created_at }}</td>
                                             <td>
                                                 <form action="{{ route('presupuestos.destroy',$presupuesto->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('presupuestos.show',$presupuesto->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    {{-- <a class="btn btn-sm btn-primary " href="{{ route('presupuestos.show',$presupuesto->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a> --}}
                                                     <a class="btn btn-sm btn-success" href="{{ route('presupuestos.edit',$presupuesto->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
