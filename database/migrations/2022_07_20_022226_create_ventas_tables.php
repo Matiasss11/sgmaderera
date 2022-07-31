@@ -31,12 +31,14 @@ class CreateVentasTables extends Migration
             $table->unsignedBigInteger('cantidad')->nullable();
             $table->unsignedBigInteger('producto_id')->nullable();
             $table->unsignedBigInteger('lista_id')->nullable();
+            $table->double('precio')->nullable();
         });
 
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->date('fecha_de_retiro')->nullable();
+            $table->double('precio_total')->nullable();
             $table->timestamps();
         });
     }

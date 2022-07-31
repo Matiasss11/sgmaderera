@@ -41,9 +41,12 @@ class ProductoService
     public static function getStringCaracteristicas($array)
     {
         $string = "";
-        for ($i=0; $i < sizeof($array["nombres"]) ; $i++) { 
-            $string = $string.$array["nombres"][$i].":=".$array["valores"][$i]."|";
+        if (isset($array["nombres"])) {
+            for ($i=0; $i < sizeof($array["nombres"]) ; $i++) { 
+                $string = $string.$array["nombres"][$i].":=".$array["valores"][$i]."|";
+            }
         }
+
         return $string;
     }
 

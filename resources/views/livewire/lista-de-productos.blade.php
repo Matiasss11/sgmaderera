@@ -28,8 +28,9 @@
 
     <div class="box-footer mt20">
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAgregarProductos">Agregar productos</button>
+        <button type="button" class="btn btn-primary" wire:click='guardar'>Guardar presupuesto</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalReserva">Ejecutar reserva</button>
         <button type="button" class="btn btn-primary" wire:click='ejecutarVenta'>Ejecutar venta</button>
-        <button type="button" class="btn btn-primary" wire:click='ejecutarReserva'>Guardar</button>
     </div>
 
     {{-- Modals --}}
@@ -68,8 +69,34 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" wire:click="agregarProductos({{$producto->id}},{{$cantidad}})">Guardar</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" wire:click="agregarProductos({{$producto->id}},{{$cantidad}})">Agregar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalReserva" tabindex="-1" aria-labelledby="Label" aria-hidden="true" wire:ignore>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Programar retiro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            {{-- Fecha de retiro --}}
+                            <div class="form-group">
+                                {{ Form::label('Fecha de retiro') }}
+                                <input type="date" wire:model="fecha_de_retiro" class="form-control" placeholder = 'Fecha de retiro'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" wire:click='ejecutarReserva'>Reservar</button>
                     </div>
             </div>
         </div>

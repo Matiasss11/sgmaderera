@@ -137,6 +137,17 @@
                         </li>
                         {{-- @endcan --}}
 
+                        {{-- @can('listar presupuestos') --}}
+                        <li class="nav-item">
+                            <a href="{{route("reservas.index")}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Reservas
+                                </p>
+                            </a>
+                        </li>
+                        {{-- @endcan --}}
+
                         {{-- @can('listar ventas') --}}
                         <li class="nav-item">
                             <a href="{{route("ventas.index")}}" class="nav-link">

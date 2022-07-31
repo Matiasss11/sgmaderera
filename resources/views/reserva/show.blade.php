@@ -7,10 +7,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Detalle de Venta</span>
+                            <span class="card-title">Detalle de Reserva</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('ventas.index') }}">Atrás</a>
+                            <a class="btn btn-primary" href="{{ route('reservas.index') }}">Atrás</a>
                         </div>
                     </div>
 

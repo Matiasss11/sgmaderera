@@ -8,22 +8,18 @@ use App\Models\Presupuesto;
 use App\Models\Venta;
 use Illuminate\Http\Request;
 
-/**
- * Class VentaController
- * @package App\Http\Controllers
- */
-class VentaController extends Controller
+class ReservaController extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $ventas = Venta::whereNull('fecha_de_retiro')->paginate(10);
+        $ventas = Venta::whereNotNull('fecha_de_retiro')->paginate(10);
 
-        return view('venta.index', compact('ventas'))
+        return view('reserva.index', compact('ventas'))
             ->with('i', (request()->input('page', 1) - 1) * $ventas->perPage());
     }
 
@@ -35,7 +31,7 @@ class VentaController extends Controller
     public function create()
     {
         $venta = new Venta();
-        return view('venta.create', compact('venta'));
+        return view('reserva.create', compact('venta'));
     }
 
     /**
@@ -85,7 +81,7 @@ class VentaController extends Controller
         }
 
 
-        return view('venta.show', compact('venta', 'elementos', 'precio_total'));
+        return view('reserva.show', compact('venta', 'elementos', 'precio_total'));
     }
 
     /**
@@ -98,7 +94,7 @@ class VentaController extends Controller
     {
         $venta = Venta::find($id);
 
-        return view('venta.edit', compact('venta'));
+        return view('reserva.edit', compact('venta'));
     }
 
     /**

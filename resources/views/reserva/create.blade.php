@@ -9,13 +9,13 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Cargar Presupuesto</span>
+                        <span class="card-title">Cargar Venta</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('presupuestos.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('ventas.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('presupuesto.form')
+                            @include('venta.form')
 
                         </form>
                     </div>

@@ -16,6 +16,7 @@ class ListaDeProductos extends Component
     public $producto_id;
     public $precio_total;
     public $stock;
+    public $fecha_de_retiro;
 
     // Collections
     public $productos;
@@ -90,17 +91,24 @@ class ListaDeProductos extends Component
         return true;
     }
 
-    /** */
-    public function ejecutarReserva(){
+    /** Guardar presupuesto y redireccionar al index */
+    public function guardar(){
         $this->guardarPresupuesto();
         return redirect()->route('presupuestos.index');
     }
 
     /** */
     public function ejecutarVenta(){
-        $venta = Venta::create();
+        $venta = Venta::create(['precio_total' => $this->precio_total]);
         $this->guardarPresupuesto($venta->id);
         return redirect()->route('ventas.index');
+    }
+
+    /** */
+    public function ejecutarReserva(){
+        $venta = Venta::create(['fecha_de_retiro' => $this->fecha_de_retiro, 'precio_total' => $this->precio_total]);
+        $this->guardarPresupuesto($venta->id);
+        return redirect()->route('reservas.index');
     }
 
     // Metodos

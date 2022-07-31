@@ -29,7 +29,10 @@ class Venta extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id','fecha_de_retiro'];
+    protected $fillable = ['user_id','fecha_de_retiro', 'precio_total'];
+    protected $casts = [
+        'fecha_de_retiro' => 'datetime:Y-m-d',
+    ];
 
 
 
