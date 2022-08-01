@@ -23,6 +23,7 @@ class CreateAdminUserSeeder extends Seeder
             'password'              =>  bcrypt(12345678),
             'remember_token'        =>  bcrypt(12345678),
             'email'                 =>  'matias@mail.com',
+            'sucursal_id'           =>  1
 
         ]);
 
@@ -39,6 +40,7 @@ class CreateAdminUserSeeder extends Seeder
             'password'              =>  bcrypt(12345678),
             'remember_token'        =>  bcrypt(12345678),
             'email'                 =>  'denis@mail.com',
+            'sucursal_id'           =>  1
         ]);
         $user2->assignRole([$role->id]);
     }

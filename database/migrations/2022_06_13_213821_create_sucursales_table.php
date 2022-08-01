@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmpresasTable extends Migration
+class CreateSucursalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEmpresasTable extends Migration
      */
     public function up()
     {
-        Schema::create('empresas', function (Blueprint $table) {
+        Schema::create('sucursales', function (Blueprint $table) {
             $table->id();
             $table->string('razon_social');
             $table->string('cuit');
@@ -21,6 +21,8 @@ class CreateEmpresasTable extends Migration
             $table->string('email')->unique();
             $table->date('fecha_creacion');
             $table->string('logo')->nullable();
+            $table->foreignId('empresa_id')->constrained('empresas');
+            $table->foreignId('domicilio_id')->constrained('domicilios');
             $table->timestamps();
         });
     }
@@ -32,6 +34,6 @@ class CreateEmpresasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empresas');
+        Schema::dropIfExists('sucursales');
     }
 }

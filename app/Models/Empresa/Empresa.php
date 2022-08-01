@@ -4,16 +4,23 @@ namespace App\Models\Empresa;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Traits\HasRoles;
 
 class Empresa extends Model
 {
-    use HasFactory, HasRoles;
+    use HasFactory;
 
-    protected $fillable = ['razon_social', 'fecha_creacion', 'domicilio_id', 'telefono', 'email', 'logo', 'cuit'];
+    protected $fillable = ['razon_social', 'fecha_creacion', 'telefono', 'email', 'logo', 'cuit'];
 
-    public function domicilio()
+
+    /**
+     * Get all of the sucursales for the Empresa
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sucursales(): HasMany
     {
-        return $this->belongsTo(Domicilio::class);
+        return $this->hasMany(Sucursal::class);
     }
 }

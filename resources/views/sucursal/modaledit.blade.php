@@ -7,53 +7,53 @@
 
 </style>
 
-<div class="modal fade" id="modal-edit-{{$empresa->id}}" data-backdrop="static" tabindex="-1" role="dialog" enctype="multipart/form-data">
+<div class="modal fade" id="modal-edit-{{$sucursal->id}}" data-backdrop="static" tabindex="-1" role="dialog" enctype="multipart/form-data">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar datos de la Organización</h5>
+                <h5 class="modal-title">Editar datos de la Sucursal</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
             {{Form::Open(array(
-                    'route'=>['empresas.update',$empresa->id], 'files' => true, 
+                    'route'=>['sucursales.update',$sucursal->id], 'files' => true, 
                     'method'=>'patch'
                 ))}}
                     <div class="row">   
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="razon_social"> Razon Social</label>
-                                <input type="string"name="razon_social"maxlength="30"value="{{$empresa->razon_social}}"class="form-control"
+                                <input type="string"name="razon_social"maxlength="30"value="{{$sucursal->razon_social}}"class="form-control"
                                     placeholder="Ingrese la razon social..."title="Introduzca el razon_social" onkeypress="return soloLetras(event)">
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="cuit"> CUIT</label>
-                                <input type="text"name="cuit"id="cuit"maxlength="30"value="{{$empresa->cuit}}"class="form-control"
+                                <input type="text"name="cuit"id="cuit"maxlength="30"value="{{$sucursal->cuit}}"class="form-control"
                                     placeholder="Ingrese el cuit..."title="Introduzca el cuit" onkeypress="return soloNumeros(event)">
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="telefono"> Telefono</label>
-                                <input type="text"name="telefono"id="telefono"maxlength="30"value="{{$empresa->telefono}}"class="form-control"
+                                <input type="text"name="telefono"id="telefono"maxlength="30"value="{{$sucursal->telefono}}"class="form-control"
                                     placeholder="Ingrese el telefono..."title="Introduzca el telefono" onkeypress="return soloNumeros(event)">
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="descripcion"> E-mail</label>
-                                <input type="email"name="email"value="{{$empresa->email}}"class="input-group form-control"
+                                <input type="email"name="email"value="{{$sucursal->email}}"class="input-group form-control"
                                 placeholder="uncorreo@mail.com..."title="Introduzca un correo electrónico">
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="fecha_creacion">Fecha de Inicio</label>
-                                <input type="date"name="fecha_creacion"value="{{ $empresa->fecha_creacion }}"class="form-control"
+                                <input type="date"name="fecha_creacion"value="{{ $sucursal->fecha_creacion }}"class="form-control"
                                 title="fecha de inicio">
                             </div>
                         </div>
