@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function() {
     include 'rutas/Sucursal.php';
     include 'rutas/TipoMovimiento.php';
     include 'rutas/User.php';
+    include 'rutas/Ventas.php';
     
 });
 
