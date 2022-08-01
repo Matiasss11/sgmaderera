@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function() {
     include 'rutas/Productos.php';
     include 'rutas/Provincias.php';
     include 'rutas/Roles.php';
+    include 'rutas/Sucursal.php';
+    include 'rutas/TipoMovimiento.php';
     include 'rutas/User.php';
     include 'rutas/Ventas.php';
     

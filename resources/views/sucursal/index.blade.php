@@ -2,7 +2,7 @@
 
 @section('navegacion')
     <li class="breadcrumb-item"><a href="configuracion">Menu Configuraciones</a></li>
-    <li class="breadcrumb-item active">Indice de empresa</li>
+    <li class="breadcrumb-item active">Indice de sucursal</li>
 @endsection
 
 <style>
@@ -21,12 +21,12 @@
         @include('errors.request')
         <div class="card-header">
             <div class="card-title">
-                <p style="font-size:130%"> <i aria-hidden="true"></i> Indice de empresa</p>
+                <p style="font-size:130%"> <i aria-hidden="true"></i> Indice de sucursal</p>
             </div>
-        @foreach ($empresas as $empresa)
-            @if(is_null($empresa))
+        @foreach ($sucursales as $sucursal)
+            @if(is_null($sucursal))
             <div class="card-tools">
-                <a href= {{ route('empresa.create')}}>
+                <a href= {{ route('sucursal.create')}}>
                     <button class="btn btn-primary">
                         <i class=""></i> Nueva
                     </button>
@@ -63,25 +63,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($empresas as $empresa)
+                    @foreach ($sucursales as $sucursal)
                     
                     <tr style="text-align:center" onmouseover="cambiar_color_over(this)" onmouseout="cambiar_color_out(this)">
                         <td style="text-align: center">
-                            @if($empresa->logo == null)
+                            @if($sucursal->logo == null)
                                 <img src="{{ asset('imagenes/default.png')}}" width="50px" class="img-circle elevation-2" alt="">
                             @else
-                                <img src="{{ asset('imagenes/logo/'.$empresa->logo)}}" width="50px" class="img-circle elevation-2" alt="">
+                                <img src="{{ asset('imagenes/logo/'.$sucursal->logo)}}" width="50px" class="img-circle elevation-2" alt="">
                             @endif
                         </td>
-                        <td>{{ $empresa->razon_social }}</td>
-                        <td>{{ $empresa->cuit }}</td>
+                        <td>{{ $sucursal->razon_social }}</td>
+                        <td>{{ $sucursal->cuit }}</td>
                         
                         <td style="text-align: center" colspan="3">
-                            <a data-backdrop="static" data-keyboard="false" data-target="#modal-edit-{{ $empresa->id }}" data-toggle="modal">
+                            <a data-backdrop="static" data-keyboard="false" data-target="#modal-edit-{{ $sucursal->id }}" data-toggle="modal">
                                 <button title="editar" class="btn btn-primary btn-responsive">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                            </a>@include('empresa.modaledit')
+                            </a>
+                            @include('sucursal.modaledit')
                             
                         </td>
                     </tr>
@@ -101,6 +102,56 @@
 
 
             $("select").select2({width:'100%'});
+
+
+
+            $(document).on('change','.pais_id',function(){
+                var pais_id=$(this).val();
+                var div=$(this).parent();
+                var op=" ";
+
+                $.ajax({
+                    type:'get',
+                    url:'{!!URL::to('sucursal/create/encontrarProvincia')!!}',
+                    data:{'id':pais_id},
+                    success:function(data){
+                        op+='<option value="0" selected disabled>-Seleccione una provincia-</option>';
+                        for(var i=0;i<data.length;i++){
+                            op+='<option value="'+data[i].id+'">'+data[i].nombre+'</option>';
+                        }
+                        div.find('.provincia_id').html(" ");
+                        div.find('.provincia_id').append(op);
+                    },
+                    error:function(){
+                    }
+                });
+            });
+
+
+            $(document).on('change','.provincia_id',function(){
+                var provincia_id=$(this).val();
+                var div=$(this).parent();
+                var op=" ";
+
+
+
+                $.ajax({
+                    type:'get',
+                    url:'{!!URL::to('sucursal/create/encontrarCiudad')!!}',
+                    data:{'id':provincia_id},
+                    success:function(data){
+                        op+='<option value="0" selected disabled>-Seleccione una ciudad-</option>';
+                        for(var i=0;i<data.length;i++){
+                            op+='<option value="'+data[i].id+'">'+data[i].nombre+'</option>';
+                        }
+                        div.find('.ciudad_id').html(" ");
+                        div.find('.ciudad_id').append(op);
+                    },
+                    error:function(){
+                    }
+                });
+            });
+        
         
             $('#telefono').mask('(0000) 00-0000');
             $('#cuit').mask('00-00000000-0');

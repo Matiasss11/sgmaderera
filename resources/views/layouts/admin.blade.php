@@ -118,7 +118,7 @@
                         {{-- @can('listar productos') --}}
                         <li class="nav-item">
                             <a href="{{route("productos.index")}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-cubes nav-icon"></i>
                                 <p>
                                     Productos
                                 </p>

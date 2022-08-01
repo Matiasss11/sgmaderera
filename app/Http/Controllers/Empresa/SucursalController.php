@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Empresa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Empresa\Empresa;
+use App\Models\Empresa\Sucursal;
 use App\Models\Sistema\Ciudad;
 use App\Models\Sistema\Domicilio;
 use App\Models\Sistema\Pais;
 use App\Models\Sistema\Provincia;
 use Illuminate\Http\Request;
 
-class EmpresaController extends Controller
+class SucursalController extends Controller
 {
     public function encontrarProvincia(Request $request)
 	{
@@ -36,11 +37,12 @@ class EmpresaController extends Controller
     public function index()
     {
         $empresas = Empresa::all();
+        $sucursales = Sucursal::all();
         $paises = Pais::all();
         $provincias = Provincia::all();
         $ciudades = Ciudad::all();
 
-        return view("empresa.index", compact('empresas','paises','provincias','ciudades'));
+        return view("sucursal.index", compact('empresas','sucursales','paises','provincias','ciudades'));
     }
 
     /**
@@ -52,7 +54,7 @@ class EmpresaController extends Controller
     {
         $paises=Pais::all();
 
-        return view("empresa.create", [
+        return view("sucursal.create", [
             "paises"            =>  $paises,
             ]);
     }
@@ -65,34 +67,42 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        $empresa = new Empresa;
-        $empresa->razon_social=$request->get('razon_social');
-        $empresa->telefono=$request->get('telefono');
-        $empresa->cuit=$request->get('cuit');
-        $empresa->email=$request->get('email');
-        $empresa->fecha_creacion=$request->get('fecha_creacion');
+        $domicilio = new Domicilio;
+        $domicilio->direccion = $request->get('direccion');
+        $domicilio->departamento = $request->get('departamento');
+        $domicilio->piso = $request->get('piso');
+        $domicilio->ciudad_id = $request->get('ciudad_id');
+        $domicilio->save();
+        
+        $sucursal = new Sucursal;
+        $sucursal->razon_social=$request->get('razon_social');
+        $sucursal->telefono=$request->get('telefono');
+        $sucursal->cuit=$request->get('cuit');
+        $sucursal->email=$request->get('email');
+        $sucursal->fecha_creacion=$request->get('fecha_creacion');
+        $sucursal->domicilio_id=$domicilio->id;
         
 
         if($request->file('logo')){
 
             $image = $request->logo_sistema;
             $image->move(public_path() . '/imagenes/logo/', $image->getClientOriginalName());
-            $empresa->logo = $image->getClientOriginalName();
+            $sucursal->logo = $image->getClientOriginalName();
 
         }
 
-        $empresa->save();
+        $sucursal->save();
 
-        return redirect()->route('empresa.index');
+        return redirect()->route('sucursal.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Empresa  $empresa
+     * @param  \App\Sucursal  $sucursal
      * @return \Illuminate\Http\Response
      */
-    public function show(Empresa $empresa)
+    public function show(Sucursal $sucursal)
     {
         //
     }
@@ -105,50 +115,58 @@ class EmpresaController extends Controller
      */
     public function edit($id)
     {
-        $empresa=Empresa::findOrFail($id);
+        $sucursal=Sucursal::findOrFail($id);
         $paises=Pais::all();
         $provincias=Provincia::all();
         $ciudades=Ciudad::all();
 
-        return view("empresa.edit",["empresa"=>$empresa,"paises"=>$paises,"provincias"=>$provincias,"ciudades"=>$ciudades]);
+        return view("sucural.edit",["sucursal"=>$sucursal,"paises"=>$paises,"provincias"=>$provincias,"ciudades"=>$ciudades]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Empresa  $empresa
+     * @param  \App\Sucursal  $sucural
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empresa $empresa)
+    public function update(Request $request, Sucursal $sucursal)
     {
-        $empresa->razon_social=$request->get('razon_social');
-        $empresa->telefono=$request->get('telefono');
-        $empresa->cuit=$request->get('cuit');
-        $empresa->email=$request->get('email');
-        $empresa->fecha_creacion=$request->get('fecha_creacion');
+        $domicilio=Domicilio::find($sucursal->domicilio_id);
+        $domicilio->direccion = $request->get('direccion');
+        $domicilio->departamento = $request->get('departamento');
+        $domicilio->piso = $request->get('piso');
+        $domicilio->ciudad_id = $request->get('ciudad_id');
+        $domicilio->update();
+        //dd($domicilio);
+        
+        $sucursal->razon_social=$request->get('razon_social');
+        $sucursal->telefono=$request->get('telefono');
+        $sucursal->cuit=$request->get('cuit');
+        $sucursal->email=$request->get('email');
+        $sucursal->fecha_creacion=$request->get('fecha_creacion');
 
-        //$empresa->authorize('update', $empresa);
+        //$sucursal->authorize('update', $sucursal);
         if($request->file('logo')){
 
             $image = $request->logo;
             $image->move(public_path() . '/imagenes/logo/', $image->getClientOriginalName());
-            $empresa->logo = $image->getClientOriginalName();
+            $sucursal->logo = $image->getClientOriginalName();
 
         }
 
-        $empresa->update();
+        $sucursal->update();
 
-        return redirect()->route('empresa.index');
+        return redirect()->route('sucursal.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Empresa  $empresa
+     * @param  \App\Sucursal  $sucursal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empresa $empresa)
+    public function destroy(Sucursal $sucursal)
     {
         //
     }

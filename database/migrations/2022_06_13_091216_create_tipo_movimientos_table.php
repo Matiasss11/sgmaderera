@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmpresasTable extends Migration
+class CreateTipoMovimientosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateEmpresasTable extends Migration
      */
     public function up()
     {
-        Schema::create('empresas', function (Blueprint $table) {
+        Schema::create('tipo_movimientos', function (Blueprint $table) {
             $table->id();
-            $table->string('razon_social');
-            $table->string('cuit');
-            $table->string('telefono');
-            $table->string('email')->unique();
-            $table->date('fecha_creacion');
-            $table->string('logo')->nullable();
+            $table->string('nombre')->unique();
+            $table->string('descripcion');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateEmpresasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empresas');
+        Schema::dropIfExists('tipo_movimientos');
     }
 }
