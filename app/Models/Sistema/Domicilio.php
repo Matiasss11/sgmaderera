@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Domicilio extends Model
 {
     use HasFactory;
-    use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'piso',

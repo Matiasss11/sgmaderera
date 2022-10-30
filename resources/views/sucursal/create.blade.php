@@ -30,7 +30,7 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         @include('errors.request')
         @include('sucursal.mensaje')
-        {!!Form::open(array('url'=>'sucursal','method'=>'POST','autocomplete'=>'off','files' => true,))!!}
+        {!!Form::open(array('url'=>'sucursales','method'=>'POST','autocomplete'=>'off','files' => true,))!!}
         {{Form::token()}}
 
         <div class="card card-dark">
@@ -40,13 +40,6 @@
                         <label for="nomrazon_socialbres"> Razón Social</label>
                         <input type="string"name="razon_social"maxlength="30"value="{{old('razon_social')}}"class="form-control"
                             placeholder="Ingrese la razón social..."title="Introduzca la razón social">
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group">
-                        <label for="cuit">CUIT</label>
-                        <input type="string"name="cuit"maxlength="30"value="{{old('cuit')}}"class="form-control"
-                            placeholder="Ingrese el cuit..."title="Introduzca el cuit">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -76,38 +69,12 @@
                             placeholder="uncorreo@mail.com..."title="Introduzca un correo electrónico">
                     </div>
                 </div><br>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group">
-                        <label for="logo_sistema">Logo del Sistema</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"> <i class="fa fa-file-image" aria-hidden="true"></i></span>
-                            </div>
-                            <input id="file"type="file" name="logo_sistema"class="form-control img-responsive">
-                        </div>
-                        <hr>
-                        <div id="preview"></div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <div class="card card-dark">
             <div class="card-body">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group">
-                        <label for="logo_reportes">Logo para Reportes</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"> <i class="fa fa-file-image" aria-hidden="true"></i></span>
-                            </div>
-                            <input id="file"type="file"name="logo_reportes"class="form-control img-responsive">
-                        </div>
-                        <hr>
-                        <div id="preview"></div>
-                    </div>
-                </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
                         <label>Pais</label>
@@ -139,7 +106,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group">
                                     <label for="direccion">
                                         Dirección
