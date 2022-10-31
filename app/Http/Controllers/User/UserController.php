@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Empresa\Sucursal;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
@@ -31,8 +32,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name','name')->all();
-        return view('user.create',compact('roles'));
+        $roles      = Role::pluck('name','name')->all();
+        $sucursales = Sucursal::all();
+        return view('user.create',compact('roles', 'sucursales'));
     }
     
     /**

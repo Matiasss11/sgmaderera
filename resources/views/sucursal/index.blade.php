@@ -23,17 +23,13 @@
             <div class="card-title">
                 <p style="font-size:130%"> <i aria-hidden="true"></i> Indice de sucursal</p>
             </div>
-        @foreach ($sucursales as $sucursal)
-            @if(is_null($sucursal))
             <div class="card-tools">
-                <a href= {{ route('sucursal.create')}}>
+                <a href= {{ route('sucursales.create')}}>
                     <button class="btn btn-primary">
                         <i class=""></i> Nueva
                     </button>
                 </a>
             </div>
-            @endif
-        @endforeach
         </div>
         <div class="card-body">
             
@@ -67,10 +63,10 @@
                     
                     <tr style="text-align:center" onmouseover="cambiar_color_over(this)" onmouseout="cambiar_color_out(this)">
                         <td style="text-align: center">
-                            @if($sucursal->logo == null)
+                            @if($sucursal->empresa->logo == null)
                                 <img src="{{ asset('imagenes/default.png')}}" width="50px" class="img-circle elevation-2" alt="">
                             @else
-                                <img src="{{ asset('imagenes/logo/'.$sucursal->logo)}}" width="50px" class="img-circle elevation-2" alt="">
+                                <img src="{{ asset('imagenes/logo/'.$sucursal->empresa->logo)}}" width="50px" class="img-circle elevation-2" alt="">
                             @endif
                         </td>
                         <td>{{ $sucursal->razon_social }}</td>

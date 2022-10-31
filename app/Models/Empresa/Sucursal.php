@@ -19,7 +19,6 @@ class Sucursal extends Model
         'fecha_creacion',
         'telefono', 
         'email', 
-        'logo', 
         'empresa_id',
         'domicilio_id'];
 

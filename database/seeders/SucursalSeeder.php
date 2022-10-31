@@ -20,8 +20,7 @@ class SucursalSeeder extends Seeder
             'telefono'          =>  '(0000) 00-0000',
             'email'             =>  'maderasEckeSucursal1@email.com',
             'fecha_creacion'    =>  '2020-08-03',
-            'logo'              =>  'logo.png',
-            'empresa_id'      =>  1,
+            'empresa_id'        =>  1,
             'domicilio_id'      =>  1,
         ]);
     }

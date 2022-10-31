@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Empresa;
 use App\Http\Controllers\Controller;
 use App\Models\Empresa\Empresa;
 use App\Models\Sistema\Ciudad;
-use App\Models\Sistema\Domicilio;
 use App\Models\Sistema\Pais;
 use App\Models\Sistema\Provincia;
 use Illuminate\Http\Request;

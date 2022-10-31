@@ -20,7 +20,6 @@ class CreateSucursalesTable extends Migration
             $table->string('telefono');
             $table->string('email')->unique();
             $table->date('fecha_creacion');
-            $table->string('logo')->nullable();
             $table->foreignId('empresa_id')->constrained('empresas');
             $table->foreignId('domicilio_id')->constrained('domicilios');
             $table->timestamps();

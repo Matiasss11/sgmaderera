@@ -4,14 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\ProductoServ;
 use App\Http\Services\ProductoService;
-use App\Models\CategoriaProducto;
-use App\Models\Producto;
+use App\Models\Productos\CategoriaProducto;
+use App\Models\Productos\Producto;
 use Illuminate\Http\Request;
 
-/**
- * Class ProductoController
- * @package App\Http\Controllers
- */
+
 class ProductoController extends Controller
 {
     // INDEX

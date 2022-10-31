@@ -73,27 +73,21 @@ class SucursalController extends Controller
         $domicilio->piso = $request->get('piso');
         $domicilio->ciudad_id = $request->get('ciudad_id');
         $domicilio->save();
+
+        $empresa  = Empresa::first();
         
         $sucursal = new Sucursal;
         $sucursal->razon_social=$request->get('razon_social');
         $sucursal->telefono=$request->get('telefono');
-        $sucursal->cuit=$request->get('cuit');
+        $sucursal->cuit=$empresa->cuit;
         $sucursal->email=$request->get('email');
         $sucursal->fecha_creacion=$request->get('fecha_creacion');
         $sucursal->domicilio_id=$domicilio->id;
-        
-
-        if($request->file('logo')){
-
-            $image = $request->logo_sistema;
-            $image->move(public_path() . '/imagenes/logo/', $image->getClientOriginalName());
-            $sucursal->logo = $image->getClientOriginalName();
-
-        }
+        $sucursal->empresa_id=$empresa->id;
 
         $sucursal->save();
 
-        return redirect()->route('sucursal.index');
+        return redirect()->route('sucursales.index');
     }
 
     /**
@@ -146,18 +140,9 @@ class SucursalController extends Controller
         $sucursal->email=$request->get('email');
         $sucursal->fecha_creacion=$request->get('fecha_creacion');
 
-        //$sucursal->authorize('update', $sucursal);
-        if($request->file('logo')){
-
-            $image = $request->logo;
-            $image->move(public_path() . '/imagenes/logo/', $image->getClientOriginalName());
-            $sucursal->logo = $image->getClientOriginalName();
-
-        }
-
         $sucursal->update();
 
-        return redirect()->route('sucursal.index');
+        return redirect()->route('sucursales.index');
     }
 
     /**

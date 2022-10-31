@@ -6,6 +6,15 @@
 @endsection
 
 @section('content')
+
+<style>
+    .select2-container .select2-selection {
+	line-height: 1.6 !important;
+	height: 2.375rem !important;
+	border-radius: 3px !important;
+    }
+</style>
+
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         @include('errors.request')
@@ -106,27 +115,40 @@
                         {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
                     </div>
                 </div>
-
-
-
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group">
-                        <label for="foto">Foto de Perfil</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"> <i class="fa fa-file-image" aria-hidden="true"></i></span>
-                            </div>
-                            <input
-                                id="file"
-                                type="file"
-                                name="foto"
-                                class="form-control img-responsive">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="sucursal_id">sucursal</label>
+                            <select name="sucursal_id"id="sucursal_id"class="sucursal_id custom-select"required>
+                                <option value="0"disabled="true" selected="true"title="-Seleccione una sucursal-">
+                                    -Seleccione una sucursal-
+                                </option>
+                                @foreach ($sucursales as $sucursal)
+                                    <option
+                                        value="{{$sucursal->id }}">{{$sucursal->razon_social}}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
-                        <hr>
-                        <div id="preview"></div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="foto">Foto de Perfil</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-file-image" aria-hidden="true"></i></span>
+                                </div>
+                                <input
+                                    id="file"
+                                    type="file"
+                                    name="foto"
+                                    class="form-control img-responsive">
+                            </div>
+                            <hr>
+                            <div id="preview"></div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -163,51 +185,7 @@
         }
 
         $(document).ready(function(){
-            var select1 = $("#persona_id").select2({width:'100%'});
-            select1.data('select2').$selection.css('height', '34px');
-
-           /* $("#persona_id").change(function(){
-                mostrarDatos();
-            });
-
-            function mostrarDatos()
-            {
-                persona_id=$("#persona_id").val();
-                personas=$("#persona_id option:selected").text();
-
-
-                /*   Aca iría el Ajax para obtener la cantidad por Paquete*/
-           /*     $.ajax({
-                    type:'get',
-                    url:'{!!URL::to('historia_clinica/create/traerDatospersona')!!}',
-                    data:{'id':persona_id},
-                    success:function(data){
-                        documento=data['documento'];
-                        nombres=data['nombres'];
-                        apellidos=data['apellidos'];
-                        fecha_nacimiento=data['fecha_nacimiento'];
-                        sexo=data['sexo'];
-
-
-                        var datospersona='<img class="img-thumbnail" height="85px" alt="sin imagen" width="85px" src='+foto+'><input type="hidden" name="stock" value="'+nombres+'"><p style="font-size:140%" class="text-left">'+nombres+'</p><input type="hidden" name="stock" value="'+apellidos+'"><p style="font-size:140%" class="text-left">'+apellidos+'</p><input type="hidden" name="stock" value="'+documento+'"><p style="font-size:140%" class="text-left">'+documento+'</p><input type="hidden" name="stock" value="'+fecha_nacimiento+'"><p style="font-size:140%" class="text-left">'+fecha_nacimiento+'</p><input type="hidden" name="stock" value="'+cuil+'"><p style="font-size:140%" class="text-left">'+cuil+'</p><input type="hidden" name="stock" value="'+peso+'"><p style="font-size:140%" class="text-left">'+peso+'</p><input type="hidden" name="stock" value="'+estatura+'"><p style="font-size:140%" class="text-left">'+estatura+'</p><input type="hidden" name="stock" value="'+empresa+'"><p style="font-size:140%" class="text-left">'+empresa+'</p><input type="hidden" name="stock" value="'+sexo+'"><p style="font-size:140%" class="text-left">'+sexo+'</p><input type="hidden" name="persona_id" value="'+persona_id+'">';
-                        $("#datos_persona").append(datospersona);
-                        eliminarDelSelect2 ();
-
-
-                    },
-                    error:function(){
-                        console.log('no anda AJAX');
-                    }
-                });
-                /*   Aca iría el Ajax para obtener el stock maximo y realizar el multiplicador*/
-
-            /*}
-                function eliminarDelSelect2 ()
-                {
-                    $("#persona_id option:selected").remove();
-
-                }*/
-
+            $("select").select2({width:'100%'});
         });
 
 </script>

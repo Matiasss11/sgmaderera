@@ -27,21 +27,12 @@ class CreateAdminUserSeeder extends Seeder
 
         ]);
 
-        $role = Role::create(['name' => 'Administrador']);
+        $role = Role::create(['name' => 'Developer']);
 
         $permissions = Permission::pluck('id','id')->all();
 
         $role->syncPermissions($permissions);
 
         $user1->assignRole([$role->id]);
-
-        $user2=User::create([
-            'name'                  =>  'Denis',
-            'password'              =>  bcrypt(12345678),
-            'remember_token'        =>  bcrypt(12345678),
-            'email'                 =>  'denis@mail.com',
-            'sucursal_id'           =>  1
-        ]);
-        $user2->assignRole([$role->id]);
     }
 }

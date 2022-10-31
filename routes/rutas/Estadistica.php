@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-    Route::get('estadistica', 'EstadisticaController@index')->name('estadistica.index');
+use App\Http\Controllers\Sistema\EstadisticaController;
+
+    Route::resource('estadisticas', EstadisticaController::class);
 
 ?>
