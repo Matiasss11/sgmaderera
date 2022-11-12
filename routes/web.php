@@ -27,6 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth'])->group(function() {
     
     include 'rutas/Audit.php';
+    include 'rutas/Categorias.php';
     include 'rutas/Ciudades.php';
     include 'rutas/Configuracion.php';
     include 'rutas/Empresa.php';
