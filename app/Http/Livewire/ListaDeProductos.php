@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\ElementosDeLista;
-use App\Models\ListaDeProducto;
-use App\Models\Presupuesto;
-use App\Models\Producto;
-use App\Models\Venta;
+use App\Models\Productos\ElementosDeLista;
+use App\Models\Productos\ListaDeProducto;
+use App\Models\Ventas\Presupuesto;
+use App\Models\Productos\Producto;
+use App\Models\Ventas\Venta;
 use Livewire\Component;
 
 class ListaDeProductos extends Component

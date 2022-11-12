@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ElementosDeLista;
-use App\Models\ListaDeProducto;
-use App\Models\Presupuesto;
-use App\Models\Venta;
+use App\Models\Productos\ElementosDeLista;
+use App\Models\Productos\ListaDeProducto;
+use App\Models\Ventas\Presupuesto;
+use App\Models\Ventas\Venta;
 use Illuminate\Http\Request;
 
 class ReservaController extends Controller
