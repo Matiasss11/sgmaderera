@@ -31,7 +31,6 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>Nro</th>
 										<th>Producto</th>
 										<th>Estado</th>
                                         <th>Precio Base</th>
@@ -43,7 +42,6 @@
                                 <tbody>
                                     @foreach ($productos as $producto)
                                         <tr>
-                                            <td>{{ $producto->id }}</td>
 											<td>{{ $producto->nombre }}</td>
                                             <td>{{ $producto->estado ? "Activo" : "Inactivo" }}</td>
                                             <td>$ {{ $producto->precio_base }}</td>

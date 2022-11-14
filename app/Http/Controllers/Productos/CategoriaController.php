@@ -80,7 +80,7 @@ class CategoriaController extends Controller
         $categoria->update($request->all());
 
         return redirect()->route('categorias.index')
-            ->with('success', "$categoria->nombre actualizadoa con éxito.");
+            ->with('success', "$categoria->nombre actualizada con éxito.");
     }
 
     /**

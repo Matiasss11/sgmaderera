@@ -108,6 +108,12 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         {{-- @can('listar movimientos') --}}
                             <li class="nav-item">
+                                <a href="{{route('clientes.index')}}" class="nav-link">
+                                    <i class="nav-icon fas fa-dollar-sign"></i>
+                                    <p>Clientes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-dollar-sign"></i>
                                     <p>Movimientos</p>
