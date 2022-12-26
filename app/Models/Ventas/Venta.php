@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property $id
  * @property $user_id
+ * @property $sucursal_id
  * @property $fecha_de_retiro
  * @property $created_at
  * @property $updated_at
@@ -29,7 +30,7 @@ class Venta extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id','fecha_de_retiro', 'precio_total'];
+    protected $fillable = ['user_id','fecha_de_retiro', 'precio_total','sucursal_id'];
     protected $casts = [
         'fecha_de_retiro' => 'datetime:Y-m-d',
     ];

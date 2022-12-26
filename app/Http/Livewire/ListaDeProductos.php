@@ -2,15 +2,25 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Services\SucursalesService;
 use App\Models\Productos\ElementosDeLista;
 use App\Models\Productos\ListaDeProducto;
 use App\Models\Ventas\Presupuesto;
 use App\Models\Productos\Producto;
 use App\Models\Ventas\Venta;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ListaDeProductos extends Component
 {   
+	// protected $sucursalesService;
+
+	// public function __construct(
+	// 	SucursalesService $sucursalesService
+	// ) {
+	// 	$this->sucursalesService = $sucursalesService;
+	// }
+
     // Inputs
     public $cantidad;
     public $producto_id;
@@ -99,8 +109,12 @@ class ListaDeProductos extends Component
 
     /** */
     public function ejecutarVenta(){
-        $venta = Venta::create(['precio_total' => $this->precio_total]);
+        $venta = Venta::create([
+            'precio_total' => $this->precio_total,
+            'sucursal_id'  =>  Auth::user()->sucursal_id,
+        ]);
         $this->guardarPresupuesto($venta->id);
+        $this->descontarStock($venta->id);
         return redirect()->route('ventas.index');
     }
 
@@ -163,6 +177,37 @@ class ListaDeProductos extends Component
             $elemento['lista_id'] = $this->lista->id;
             ElementosDeLista::create($elemento);
         }
+
+        return true;
+    }
+
+    /** Guardar presupuesto, guardar lista y eliminar elementos previos y guardar los nuevos */
+    public function descontarStock($venta_id = null){
+        // Obtener presupuesto
+        $presupuesto = Presupuesto::where('venta_id', $venta_id)->first();
+
+        // Obtener lista
+        $lista = ListaDeProducto::where('presupuesto_id',$presupuesto->id)->first();
+
+        // Obtener elementos
+        $elementos = ElementosDeLista::where('lista_id',$lista->id)->get();
+
+        // dd($elementos);
+
+        for ($i=0; $i < count($elementos); $i++) { 
+            $producto = Producto::where('id',$elementos[$i]['producto_id'])->first();
+            // dd($elementos[$i]);
+            $producto->stock -= $elementos[$i]['cantidad'];
+            $producto->update();
+        }
+
+        // Actualizar stock del producto
+        // foreach ($elementos as $elemento) {
+        //     $producto = Producto::whereId($elemento->id)->first();
+        //     var_dump($elemento);
+        //     $producto->stock -= $elemento->cantidad;
+        //     $producto->update();
+        // }
 
         return true;
     }

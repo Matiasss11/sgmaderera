@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Sucursal extends Model
 {
+    const DEFAULT = 1;
+
     use HasFactory;
 
     protected $table = "sucursales";
