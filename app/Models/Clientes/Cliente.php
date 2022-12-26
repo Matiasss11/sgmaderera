@@ -18,7 +18,18 @@ class Cliente extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre','cuil','telefono','email','estado','forma_pago_id','domicilio_id'];
+    protected $fillable = [
+        'nombre',
+        'apellido',
+        'razon_social',
+        'cuil',
+        'cuit',
+        'telefono',
+        'email',
+        'estado',
+        'forma_pago_id',
+        'domicilio_id',
+        'tipo_cliente_id'];
 
     /**
      * Get the domicilio associated with the Cliente
