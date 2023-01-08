@@ -8,20 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Movimiento extends Model
 {
     use HasFactory;
-
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'nombre', 'descripcion'
-     ];
+    
+    /**
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
+   protected $fillable = [
+      'monto', 'subtipo_movimiento_id', 'sucursal_id', 'operacion_id'
+   ];
  
-     protected $table = 'tipo_movimientos';
- 
-     public function tipo()
-     {
-         return $this->belongsTo(TipoMovimiento::class);
-     }
+   public function subtipo_movimiento()
+   {
+       return $this->belongsTo(SubtipoMovimiento::class, 'subtipo_movimiento_id');
+   }
 }

@@ -7,6 +7,7 @@ use App\Models\Productos\ElementosDeLista;
 use App\Models\Productos\ListaDeProducto;
 use App\Models\Ventas\Presupuesto;
 use App\Models\Productos\Producto;
+use App\Models\Sistema\Movimiento;
 use App\Models\Ventas\Venta;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -110,18 +111,26 @@ class ListaDeProductos extends Component
     /** */
     public function ejecutarVenta(){
         $venta = Venta::create([
+            'user_id'      => Auth::user()->id,
             'precio_total' => $this->precio_total,
-            'sucursal_id'  =>  Auth::user()->sucursal_id,
+            'sucursal_id'  => Auth::user()->sucursal_id,
         ]);
         $this->guardarPresupuesto($venta->id);
         $this->descontarStock($venta->id);
+        $this->registrarMovimiento($venta->id);
         return redirect()->route('ventas.index');
     }
 
     /** */
     public function ejecutarReserva(){
-        $venta = Venta::create(['fecha_de_retiro' => $this->fecha_de_retiro, 'precio_total' => $this->precio_total]);
+        $venta = Venta::create([
+            'user_id'         => Auth::user()->id,
+            'fecha_de_retiro' => $this->fecha_de_retiro, 
+            'precio_total'    => $this->precio_total,
+            'sucursal_id'     => Auth::user()->sucursal_id,
+        ]);
         $this->guardarPresupuesto($venta->id);
+        $this->registrarMovimiento($venta->id);
         return redirect()->route('reservas.index');
     }
 
@@ -208,6 +217,20 @@ class ListaDeProductos extends Component
         //     $producto->stock -= $elemento->cantidad;
         //     $producto->update();
         // }
+
+        return true;
+    }
+
+    public function registrarMovimiento($venta_id = null)
+    {
+        $venta = Venta::find($venta_id);
+
+        Movimiento::create([
+            'monto'         => $venta->precio_total,
+            'sucursal_id'   =>  Auth::user()->sucursal_id,
+            'operacion_id'  => $venta->id,
+            'subtipo_movimiento_id'  => 1,
+        ]);
 
         return true;
     }

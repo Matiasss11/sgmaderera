@@ -15,9 +15,10 @@ class CreateMovimientosTable extends Migration
     {
         Schema::create('movimientos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->unique();
-            $table->string('descripcion');
-            $table->foreignId('tipo_movimiento_id')->constrained('tipo_movimientos');
+            $table->double('monto');
+            $table->integer('sucursal_id');
+            $table->integer('operacion_id');
+            $table->foreignId('subtipo_movimiento_id')->constrained('subtipo_movimientos');
             $table->timestamps();
         });
     }

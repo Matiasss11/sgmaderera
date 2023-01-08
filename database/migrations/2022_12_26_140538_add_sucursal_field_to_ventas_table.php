@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldsToVentasTable extends Migration
+class AddSucursalFieldToVentasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddFieldsToVentasTable extends Migration
     public function up()
     {
         Schema::table('ventas', function (Blueprint $table) {            
-            $table->integer('sucursal_id')->nullable();            
-            $table->integer('movimiento_id')->nullable();
+            $table->integer('sucursal_id')->nullable();
         });
     }
 
@@ -28,7 +27,6 @@ class AddFieldsToVentasTable extends Migration
     {
         Schema::table('ventas', function (Blueprint $table) {
             Schema::dropColumn('sucursal_id');
-            Schema::dropColumn('movimiento_id');
         });
     }
 }

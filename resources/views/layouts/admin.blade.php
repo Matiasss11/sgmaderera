@@ -109,13 +109,13 @@
                         {{-- @can('listar movimientos') --}}
                             <li class="nav-item">
                                 <a href="{{route('clientes.index')}}" class="nav-link">
-                                    <i class="nav-icon fas fa-dollar-sign"></i>
+                                    <i class="nav-icon far fa-circle"></i>
                                     <p>Clientes</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-dollar-sign"></i>
+                                <a href="{{route('movimientos.index')}}" class="nav-link">
+                                    <i class="nav-icon far fa-circle"></i>
                                     <p>Movimientos</p>
                                 </a>
                             </li>
@@ -168,7 +168,7 @@
                         {{-- @can('listar usuarios') --}}
                         <li class="nav-item">
                             <a href="{{ route('user.index') }}" class="nav-link">
-                                <i class="fas fa-id-card nav-icon text-warning"></i>
+                                <i class="far fa-circle nav-icon"></i>
                                 <p>Usuarios</p>
                             </a>
                         </li>
