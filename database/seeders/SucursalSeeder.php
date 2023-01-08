@@ -23,5 +23,15 @@ class SucursalSeeder extends Seeder
             'empresa_id'        =>  1,
             'domicilio_id'      =>  1,
         ]);
+
+        Sucursal::create([
+            'razon_social'      =>  'Maderas Ecke-Sucursal 2',
+            'cuit'              =>  '00-00000000-0',
+            'telefono'          =>  '(0000) 00-0000',
+            'email'             =>  'maderasEckeSucursal2@email.com',
+            'fecha_creacion'    =>  '2021-09-01',
+            'empresa_id'        =>  1,
+            'domicilio_id'      =>  2
+        ]);
     }
 }

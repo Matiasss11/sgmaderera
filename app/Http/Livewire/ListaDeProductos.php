@@ -39,7 +39,7 @@ class ListaDeProductos extends Component
     public function mount()
     {
         $this->precio_total = 0;
-        $this->productos = Producto::all();
+        $this->productos = Producto::where('sucursal_id', Auth::user()->id)->get();
 
         if ($this->presupuesto_id) {
             // Obtener lista de productos
@@ -170,7 +170,10 @@ class ListaDeProductos extends Component
         if ($this->presupuesto_id) {
             Presupuesto::find($this->presupuesto_id)->update(['venta_id' => $venta_id]);
         }else {
-            $presupuesto = Presupuesto::create(['venta_id' => $venta_id]);
+            $presupuesto = Presupuesto::create([
+                'venta_id'    => $venta_id,
+                'sucursal_id' => Auth::user()->id,
+            ]);
             $this->presupuesto_id = $presupuesto->id;
         }
 

@@ -6,6 +6,7 @@ use App\Models\Productos\ElementosDeLista;
 use App\Models\Productos\ListaDeProducto;
 use App\Models\Ventas\Presupuesto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class PresupuestoController
@@ -21,7 +22,8 @@ class PresupuestoController extends Controller
     public function index()
     {
         $presupuestos = Presupuesto::where('venta_id', null)
-                            ->paginate();
+                                ->where('sucursal_id', Auth::user()->id)
+                                ->paginate();
 
         return view('presupuesto.index', compact('presupuestos'))
             ->with('i', (request()->input('page', 1) - 1) * $presupuestos->perPage());

@@ -14,7 +14,7 @@ class AddSucursalFieldToProductosTable extends Migration
     public function up()
     {
         Schema::table('productos', function (Blueprint $table) {            
-            $table->integer('sucursal_id')->nullable();
+            $table->integer('sucursal_id')->nullable()->after('estado');
         });
     }
 

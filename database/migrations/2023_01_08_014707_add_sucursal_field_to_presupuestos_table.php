@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAtencionFieldToPresupuestosTable extends Migration
+class AddSucursalFieldToPresupuestosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddAtencionFieldToPresupuestosTable extends Migration
      */
     public function up()
     {
-        Schema::table('presupuestos', function (Blueprint $table) {
-            $table->integer('atencion')->nullable()->after('venta_id');
+        Schema::table('presupuestos', function (Blueprint $table) {            
+            $table->integer('sucursal_id')->nullable()->after('atencion');
         });
     }
 
@@ -26,7 +26,7 @@ class AddAtencionFieldToPresupuestosTable extends Migration
     public function down()
     {
         Schema::table('presupuestos', function (Blueprint $table) {
-            $table->dropColumn('atencion');
+            Schema::dropColumn('sucursal_id');
         });
     }
 }

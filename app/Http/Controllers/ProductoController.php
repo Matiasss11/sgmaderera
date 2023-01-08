@@ -7,14 +7,15 @@ use App\Http\Services\ProductoService;
 use App\Models\Productos\CategoriaProducto;
 use App\Models\Productos\Producto;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class ProductoController extends Controller
 {
     // INDEX
     public function index()
     {
-        $productos = Producto::paginate();
+        $productos = Producto::where('sucursal_id', Auth::user()->id)
+                            ->paginate();
 
         return view('producto.index', compact('productos'))
             ->with('i', (request()->input('page', 1) - 1) * $productos->perPage());
@@ -40,6 +41,7 @@ class ProductoController extends Controller
 
         //Caracteristicas
         $request["caracteristicas"] = ProductoService::getStringCaracteristicas($request->arrayCaracteristicas);
+        $request["sucursal_id"] = Auth::user()->sucursal_id;
 
         $producto = Producto::create($request->all());
 

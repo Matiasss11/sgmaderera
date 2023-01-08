@@ -7,6 +7,7 @@ use App\Models\Productos\ListaDeProducto;
 use App\Models\Ventas\Presupuesto;
 use App\Models\Ventas\Venta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservaController extends Controller
 {
@@ -17,7 +18,9 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        $ventas = Venta::whereNotNull('fecha_de_retiro')->paginate(10);
+        $ventas = Venta::whereNotNull('fecha_de_retiro')
+                        ->where('sucursal_id', Auth::user()->id)
+                        ->paginate(10);
 
         return view('reserva.index', compact('ventas'))
             ->with('i', (request()->input('page', 1) - 1) * $ventas->perPage());
