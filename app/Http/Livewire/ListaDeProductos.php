@@ -3,11 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Http\Services\SucursalesService;
+use App\Models\Clientes\Cliente;
 use App\Models\Productos\ElementosDeLista;
 use App\Models\Productos\ListaDeProducto;
 use App\Models\Ventas\Presupuesto;
 use App\Models\Productos\Producto;
 use App\Models\Sistema\Movimiento;
+use App\Models\Ventas\FormaPago;
 use App\Models\Ventas\Venta;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -52,7 +54,9 @@ class ListaDeProductos extends Component
 
     public function render()
     {
-        return view('livewire.lista-de-productos');
+        $clientes = Cliente::all();
+        $formas   = FormaPago::all();
+        return view('livewire.lista-de-productos', compact('clientes','formas'));
     }
 
     /** */

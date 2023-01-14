@@ -17,10 +17,16 @@
             <div class="card-tools">
                 <a data-keyboard="false" data-target="#modal-create" data-toggle="modal">
                     <button title="" class="btn btn-primary btn-responsive">
-                        <i class="">Nuevo</i>
+                        <i class="">Nuevo Cliente Particular</i>
                     </button>
                 </a>
                 @include('clientes.modalcreate')
+                <a data-keyboard="false" data-target="#modal-create-empresarial" data-toggle="modal">
+                    <button title="" class="btn btn-primary btn-responsive">
+                        <i class="">Nuevo Cliente Empresarial</i>
+                    </button>
+                </a>
+                @include('clientes.modalcreateEmpresarial')
             </div>
         </div>
         <div class="card-body">

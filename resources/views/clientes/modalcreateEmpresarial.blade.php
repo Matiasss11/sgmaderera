@@ -7,7 +7,7 @@
 
 </style>
 
-<div class="modal fade" id="modal-create" data-backdrop="static" tabindex="-1" role="dialog">
+<div class="modal fade" id="modal-create-empresarial" data-backdrop="static" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,23 +20,16 @@
                 @csrf
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-8">
                             <div class="form-group">
-                                <label for="nombre"> Nombre</label>
-                                <input type="string"name="nombre"maxlength="30"value="{{old('nombre')}}"class="form-control"
-                                    placeholder="Ingrese el nombre..."title="Introduzca el nombre">
+                                <label for="razon_social"> Razon Social</label>
+                                <input type="string"name="razon_social"maxlength="30"value="{{old('razon_social')}}"class="form-control"
+                                    placeholder="Ingrese la razon social..."title="Introduzca la razon social">
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="apellido"> Apellido</label>
-                                <input type="string"name="apellido"maxlength="30"value="{{old('apellido')}}"class="form-control"
-                                    placeholder="Ingrese el apellido..."title="Introduzca el apellido">
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label for="cuil"> CUIL</label>
+                                <label for="cuil"> CUIT</label>
                                 <input type="string"name="cuil"maxlength="30"value="{{old('cuil')}}"class="form-control"
                                     placeholder="Ingrese el cuil..."title="Introduzca el cuil">
                             </div>
