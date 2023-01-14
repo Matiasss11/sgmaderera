@@ -106,11 +106,16 @@
 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        {{-- @can('listar movimientos') --}}
                             <li class="nav-item">
                                 <a href="{{route('clientes.index')}}" class="nav-link">
                                     <i class="nav-icon far fa-circle"></i>
                                     <p>Clientes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>Entregas</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -119,9 +124,7 @@
                                     <p>Movimientos</p>
                                 </a>
                             </li>
-                        {{-- @endcan --}}
 
-                        {{-- @can('listar productos') --}}
                         <li class="nav-item">
                             <a href="{{route("productos.index")}}" class="nav-link">
                                 <i class="fas fa-cubes nav-icon"></i>
@@ -130,9 +133,7 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
 
-                        {{-- @can('listar presupuestos') --}}
                         <li class="nav-item">
                             <a href="{{route("presupuestos.index")}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -141,9 +142,7 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
 
-                        {{-- @can('listar presupuestos') --}}
                         <li class="nav-item">
                             <a href="{{route("reservas.index")}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -152,9 +151,7 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
 
-                        {{-- @can('listar ventas') --}}
                         <li class="nav-item">
                             <a href="{{route("ventas.index")}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -163,25 +160,21 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
-                
-                        {{-- @can('listar usuarios') --}}
                         <li class="nav-item">
                             <a href="{{ route('user.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Usuarios</p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
 
                         {{-- @role('Administrador') --}}
                         <li class="nav-header">SISTEMA</li>
-                        <li class="nav-item">
+                        <!--li class="nav-item">
                             <a href="{{ route('audits.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-eye"></i>
                                 <p>Auditoria</p>
                             </a>
-                        </li>
+                        </li-->
                         <li class="nav-item">
                             <a href="{{ route('configuracion.index') }}" class="nav-link">
                                 <i class="nav-icon fa fa-cogs"></i>

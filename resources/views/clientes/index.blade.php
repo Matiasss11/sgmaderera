@@ -48,8 +48,12 @@
                     @foreach ($clientes as $cliente)
                     
                     <tr style="text-align:center" onmouseover="cambiar_color_over(this)" onmouseout="cambiar_color_out(this)">
-                        <td>{{ $cliente->nombre }}</td>
-                        <td>{{ $cliente->forma_pago }}</td>
+                        @if (isset($cliente->nombre))
+                            <td>{{ $cliente->Apellido }} {{$cliente->nombre}}</td>    
+                        @else
+                            <td>{{ $cliente->razon_social }}</td>
+                        @endif
+                        <td>{{ $cliente->formaPago->nombre }}</td>
                         <td>{{ $cliente->telefono }}</td>
                         <td>{{ $cliente->email }}</td>
                         

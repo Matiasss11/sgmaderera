@@ -3,8 +3,10 @@
 namespace App\Models\Clientes;
 
 use App\Models\Sistema\Domicilio;
+use App\Models\Ventas\FormaPago;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Cliente extends Model
@@ -39,5 +41,15 @@ class Cliente extends Model
     public function domicilio(): HasOne
     {
         return $this->hasOne(Domicilio::class);
+    }
+
+    /**
+     * Get the formaPago that owns the Cliente
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function formaPago(): BelongsTo
+    {
+        return $this->belongsTo(FormaPago::class);
     }
 }

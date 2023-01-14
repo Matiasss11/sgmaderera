@@ -56,7 +56,12 @@
                                     </option>
                                     @foreach ($clientes as $cliente)
                                         <option
-                                            value="{{$cliente->id}}">{{$cliente->nombre}}
+                                            value="{{$cliente->id}}">
+                                            @if (@isset($cliente->nombre))
+                                                {{$cliente->nombre}} {{$cliente->apellido}}
+                                            @else
+                                                {{$cliente->razon_social}}
+                                            @endif
                                         </option>
                                     @endforeach
                                 </select>
