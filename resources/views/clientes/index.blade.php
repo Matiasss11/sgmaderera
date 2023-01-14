@@ -1,8 +1,7 @@
 @extends('layouts.admin')  <!-- Extiende de layout -->
 
 @section('navegacion')
-    <li class="breadcrumb-item"><a href="configuracion">Menu Configuraciones</a></li>
-    <li class="breadcrumb-item active">Indice de Categorias</li>
+    <li class="breadcrumb-item active">Indice de Clientes</li>
 @endsection
 
 
@@ -13,15 +12,21 @@
         @include('errors.request')
         <div class="card-header">
             <div class="card-title">
-                <p style="font-size:130%"> <i aria-hidden="true"></i> Indice de Categorias</p>
+                <p style="font-size:130%"> <i aria-hidden="true"></i> Indice de Clientes</p>
             </div>
             <div class="card-tools">
                 <a data-keyboard="false" data-target="#modal-create" data-toggle="modal">
                     <button title="" class="btn btn-primary btn-responsive">
-                        <i class="">Nueva</i>
+                        <i class="">Nuevo Cliente Particular</i>
                     </button>
                 </a>
-                @include('categorias.modalcreate')
+                @include('clientes.modalcreate')
+                <a data-keyboard="false" data-target="#modal-create-empresarial" data-toggle="modal">
+                    <button title="" class="btn btn-primary btn-responsive">
+                        <i class="">Nuevo Cliente Empresarial</i>
+                    </button>
+                </a>
+                @include('clientes.modalcreateEmpresarial')
             </div>
         </div>
         <div class="card-body">
@@ -31,26 +36,34 @@
             <table id="tablaDetalle" style="width:100%" class="table table-striped table-hover">
                 <thead style="background-color:#fff">
                     <tr style="text-align:center" class="text-uppercase text-dark">
-                        <th width="25%" >Nombre</th>
-                        <th width="55%" >Descripcion</th>
+                        <th width="30%" >Nombre</th>
+                        <th width="15%" >Forma de Pago</th>
+                        <th width="15%" >Telefono</th>
+                        <th width="20%" >Email</th>
                         <th width="20%" >Opciones</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categorias as $categoria)
+                    @foreach ($clientes as $cliente)
                     
                     <tr style="text-align:center" onmouseover="cambiar_color_over(this)" onmouseout="cambiar_color_out(this)">
-                        <td>{{ $categoria->nombre }}</td>
-                        <td>{{ $categoria->descripcion }}</td>
+                        @if (isset($cliente->nombre))
+                            <td>{{ $cliente->Apellido }} {{$cliente->nombre}}</td>    
+                        @else
+                            <td>{{ $cliente->razon_social }}</td>
+                        @endif
+                        <td>{{ $cliente->formaPago->nombre }}</td>
+                        <td>{{ $cliente->telefono }}</td>
+                        <td>{{ $cliente->email }}</td>
                         
                         <td style="text-align: center" colspan="3">
-                            <a data-backdrop="static" data-keyboard="false" data-target="#modal-edit-{{ $categoria->id  }}" data-toggle="modal">
+                            <a data-backdrop="static" data-keyboard="false" data-target="#modal-edit-{{ $cliente->id  }}" data-toggle="modal">
                                 <button title="editar" class="btn btn-primary btn-responsive">
                                     <i class="fas fa-edit"></i>
                                 </button>
                             </a>
-                            @include('categorias.modaledit')
+                            @include('clientes.modaledit')
                             
                         </td>
                     </tr>

@@ -2,15 +2,28 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\ElementosDeLista;
-use App\Models\ListaDeProducto;
-use App\Models\Presupuesto;
-use App\Models\Producto;
-use App\Models\Venta;
+use App\Http\Services\SucursalesService;
+use App\Models\Clientes\Cliente;
+use App\Models\Productos\ElementosDeLista;
+use App\Models\Productos\ListaDeProducto;
+use App\Models\Ventas\Presupuesto;
+use App\Models\Productos\Producto;
+use App\Models\Sistema\Movimiento;
+use App\Models\Ventas\FormaPago;
+use App\Models\Ventas\Venta;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ListaDeProductos extends Component
 {   
+	// protected $sucursalesService;
+
+	// public function __construct(
+	// 	SucursalesService $sucursalesService
+	// ) {
+	// 	$this->sucursalesService = $sucursalesService;
+	// }
+
     // Inputs
     public $cantidad;
     public $producto_id;
@@ -28,7 +41,7 @@ class ListaDeProductos extends Component
     public function mount()
     {
         $this->precio_total = 0;
-        $this->productos = Producto::all();
+        $this->productos = Producto::where('sucursal_id', Auth::user()->id)->get();
 
         if ($this->presupuesto_id) {
             // Obtener lista de productos
@@ -41,7 +54,9 @@ class ListaDeProductos extends Component
 
     public function render()
     {
-        return view('livewire.lista-de-productos');
+        $clientes = Cliente::all();
+        $formas   = FormaPago::all();
+        return view('livewire.lista-de-productos', compact('clientes','formas'));
     }
 
     /** */
@@ -99,15 +114,27 @@ class ListaDeProductos extends Component
 
     /** */
     public function ejecutarVenta(){
-        $venta = Venta::create(['precio_total' => $this->precio_total]);
+        $venta = Venta::create([
+            'user_id'      => Auth::user()->id,
+            'precio_total' => $this->precio_total,
+            'sucursal_id'  => Auth::user()->sucursal_id,
+        ]);
         $this->guardarPresupuesto($venta->id);
+        $this->descontarStock($venta->id);
+        $this->registrarMovimiento($venta->id);
         return redirect()->route('ventas.index');
     }
 
     /** */
     public function ejecutarReserva(){
-        $venta = Venta::create(['fecha_de_retiro' => $this->fecha_de_retiro, 'precio_total' => $this->precio_total]);
+        $venta = Venta::create([
+            'user_id'         => Auth::user()->id,
+            'fecha_de_retiro' => $this->fecha_de_retiro, 
+            'precio_total'    => $this->precio_total,
+            'sucursal_id'     => Auth::user()->sucursal_id,
+        ]);
         $this->guardarPresupuesto($venta->id);
+        $this->registrarMovimiento($venta->id);
         return redirect()->route('reservas.index');
     }
 
@@ -147,7 +174,10 @@ class ListaDeProductos extends Component
         if ($this->presupuesto_id) {
             Presupuesto::find($this->presupuesto_id)->update(['venta_id' => $venta_id]);
         }else {
-            $presupuesto = Presupuesto::create(['venta_id' => $venta_id]);
+            $presupuesto = Presupuesto::create([
+                'venta_id'    => $venta_id,
+                'sucursal_id' => Auth::user()->id,
+            ]);
             $this->presupuesto_id = $presupuesto->id;
         }
 
@@ -163,6 +193,51 @@ class ListaDeProductos extends Component
             $elemento['lista_id'] = $this->lista->id;
             ElementosDeLista::create($elemento);
         }
+
+        return true;
+    }
+
+    /** Guardar presupuesto, guardar lista y eliminar elementos previos y guardar los nuevos */
+    public function descontarStock($venta_id = null){
+        // Obtener presupuesto
+        $presupuesto = Presupuesto::where('venta_id', $venta_id)->first();
+
+        // Obtener lista
+        $lista = ListaDeProducto::where('presupuesto_id',$presupuesto->id)->first();
+
+        // Obtener elementos
+        $elementos = ElementosDeLista::where('lista_id',$lista->id)->get();
+
+        // dd($elementos);
+
+        for ($i=0; $i < count($elementos); $i++) { 
+            $producto = Producto::where('id',$elementos[$i]['producto_id'])->first();
+            // dd($elementos[$i]);
+            $producto->stock -= $elementos[$i]['cantidad'];
+            $producto->update();
+        }
+
+        // Actualizar stock del producto
+        // foreach ($elementos as $elemento) {
+        //     $producto = Producto::whereId($elemento->id)->first();
+        //     var_dump($elemento);
+        //     $producto->stock -= $elemento->cantidad;
+        //     $producto->update();
+        // }
+
+        return true;
+    }
+
+    public function registrarMovimiento($venta_id = null)
+    {
+        $venta = Venta::find($venta_id);
+
+        Movimiento::create([
+            'monto'         => $venta->precio_total,
+            'sucursal_id'   =>  Auth::user()->sucursal_id,
+            'operacion_id'  => $venta->id,
+            'subtipo_movimiento_id'  => 1,
+        ]);
 
         return true;
     }

@@ -1,33 +1,35 @@
 <?php
 
-namespace App\Models\Productos;
+namespace App\Models\Ventas;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class ListaDeProducto
+ * Class Presupuesto
  *
  * @property $id
- * @property $presupuesto_id
+ * @property $nombre
+ * @property $descripcion
+ * @property $created_at
+ * @property $updated_at
  *
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class ListaDeProducto extends Model
+class FormaPago extends Model
 {
     
     static $rules = [
     ];
 
     protected $perPage = 20;
-    public $timestamps = false;
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['presupuesto_id'];
+    protected $fillable = ['nombre','descripcion'];
 
 
 

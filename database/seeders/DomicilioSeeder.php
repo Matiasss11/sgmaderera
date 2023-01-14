@@ -15,10 +15,17 @@ class DomicilioSeeder extends Seeder
     public function run()
     {
         Domicilio::create([
-            'departamento'  =>  '2000',
-            'piso'          =>   '2',
+            'departamento'  => '2',
+            'piso'          => '2',
             'direccion'     => 'Lopez y Planes, 500',
             'ciudad_id'     =>  1,
+            ]);
+
+        Domicilio::create([
+            'departamento'  => '3',
+            'piso'          => '2',
+            'direccion'     => 'Alvear, 500',
+            'ciudad_id'     =>  2,
             ]);
 
     }

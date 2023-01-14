@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Ventas;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Presupuesto
  *
  * @property $id
+ * @property $atencion
  * @property $cliente_id
  * @property $venta_id
  * @property $created_at
@@ -29,7 +30,7 @@ class Presupuesto extends Model
      *
      * @var array
      */
-    protected $fillable = ['cliente_id','venta_id'];
+    protected $fillable = ['atencion','cliente_id','venta_id','sucursal_id'];
 
 
 

@@ -21,5 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SucursalSeeder::class);
         $this->call(PermissionTableSeeder::class);
         $this->call(CreateAdminUserSeeder::class);
+        $this->call(TipoMovimientoSeeder::class);
+        $this->call(SubtipoMovimientoSeeder::class);
+        $this->call(CategoriaSeeder::class);
+        $this->call(FormaPagoSeeder::class);
     }
 }
