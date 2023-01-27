@@ -17,8 +17,6 @@ class CreateProvinciasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre')->unique();
             $table->timestamps();
-            $table->unsignedBigInteger('pais_id');
-            $table->foreign('pais_id')->references('id')->on('paises')->onDelete('restrict');
         });
     }
 

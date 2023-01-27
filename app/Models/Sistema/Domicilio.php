@@ -12,11 +12,17 @@ class Domicilio extends Model
     protected $fillable = [
         'piso',
         'departamento',
-        'direccion',
+        'numero',
+        'calle_id',
         'ciudad_id',
     ];
 
     protected $table = 'domicilios';
+
+    public function calle()
+    {
+        return $this->belongsTo(Calle::class);
+    }
 
     public function ciudad()
     {

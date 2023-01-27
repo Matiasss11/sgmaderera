@@ -15,12 +15,9 @@ class CreateCiudadesTable extends Migration
     {
         Schema::create('ciudades', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
             $table->string('nombre');
-            $table->string('codigo_postal');
-            $table->unsignedBigInteger('provincia_id');
-            $table->foreign('provincia_id')->references('id')->on('provincias')->onDelete('restrict');
-
+            $table->unsignedBigInteger('provincia_id')->nullable();
+            $table->timestamps();
         });
     }
 

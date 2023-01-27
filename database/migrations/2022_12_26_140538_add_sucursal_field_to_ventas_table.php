@@ -14,7 +14,7 @@ class AddSucursalFieldToVentasTable extends Migration
     public function up()
     {
         Schema::table('ventas', function (Blueprint $table) {            
-            $table->integer('sucursal_id')->nullable();
+            $table->integer('sucursal_id')->after('precio_total')->nullable();
         });
     }
 
