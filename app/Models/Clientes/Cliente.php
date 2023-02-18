@@ -7,6 +7,7 @@ use App\Models\Ventas\FormaPago;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Cliente extends Model
@@ -34,13 +35,13 @@ class Cliente extends Model
         'tipo_cliente_id'];
 
     /**
-     * Get the domicilio associated with the Cliente
+     * The domicilios that belong to the Cliente
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function domicilio(): HasOne
+    public function domicilios(): BelongsToMany
     {
-        return $this->hasOne(Domicilio::class);
+        return $this->belongsToMany(Domicilio::class);
     }
 
     /**

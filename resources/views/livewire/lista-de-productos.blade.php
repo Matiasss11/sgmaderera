@@ -126,9 +126,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                        @if (isset($product) && $cantidad)
+                        {{-- @if (isset($product) && $cantidad) --}}
                             <button type="button" class="btn btn-primary" wire:click="agregarProductos({{$producto->id}},{{$cantidad}})">Agregar</button>
-                        @endif
+                        {{-- @endif --}}
                     </div>
             </div>
         </div>

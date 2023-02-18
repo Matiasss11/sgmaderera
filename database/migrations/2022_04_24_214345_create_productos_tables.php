@@ -18,7 +18,7 @@ class CreateProductosTables extends Migration
             $table->string('nombre');
             $table->text('descripcion')->nullable();
             $table->text('caracteristicas')->nullable(); //Separar por "|" y crear función para rearmar el texto.
-            $table->integer('stock');
+            $table->double('stock');
             $table->double('precio_base')->nullable();
             $table->binary('imagen')->nullable();
             $table->boolean('estado')->default(true);

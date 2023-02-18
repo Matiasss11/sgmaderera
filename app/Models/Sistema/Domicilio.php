@@ -2,6 +2,7 @@
 
 namespace App\Models\Sistema;
 
+use App\Models\Clientes\Cliente;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,9 +30,9 @@ class Domicilio extends Model
         return $this->belongsTo(Ciudad::class);
     }
 
-    public function persona()
+    public function clientes()
     {
-        return $this->hasOne(Persona::class);
+        return $this->belongsToMany(Cliente::class);
     }
 
     public function empresa()

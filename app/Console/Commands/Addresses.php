@@ -66,5 +66,31 @@ class Addresses extends Command
             ]);
         }
 
+        $response   = Http::get('https://apis.datos.gob.ar/georef/api/localidades?provincia="Córdoba"&max=4142');
+        $response   = json_decode($response->getBody(),true);
+        $ciudades = json_encode($response['localidades']);
+        $ciudades = json_decode($ciudades);
+
+        foreach ($ciudades as $ciudad) {
+            $provincia = Provincia::whereNombre($ciudad->provincia->nombre)->first();
+            Ciudad::create([
+                'nombre'       => $ciudad->localidad_censal->nombre,
+                'provincia_id' => $provincia->id
+            ]);
+        }
+
+        $response   = Http::get('https://apis.datos.gob.ar/georef/api/localidades?provincia="Buenos Aires"&max=4142');
+        $response   = json_decode($response->getBody(),true);
+        $ciudades = json_encode($response['localidades']);
+        $ciudades = json_decode($ciudades);
+
+        foreach ($ciudades as $ciudad) {
+            $provincia = Provincia::whereNombre($ciudad->provincia->nombre)->first();
+            Ciudad::create([
+                'nombre'       => $ciudad->localidad_censal->nombre,
+                'provincia_id' => $provincia->id
+            ]);
+        }
+
     }
 }
