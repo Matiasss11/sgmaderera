@@ -2,7 +2,10 @@
 
 namespace App\Models\Ventas;
 
+use App\Models\Clientes\Cliente;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Presupuesto
@@ -31,6 +34,17 @@ class Presupuesto extends Model
      * @var array
      */
     protected $fillable = ['atencion','cliente_id','venta_id','sucursal_id'];
+
+
+    /**
+     * Get the cliente that owns the Presupuesto
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cliente(): BelongsTo
+    {
+        return $this->belongsTo(Cliente::class);
+    }
 
 
 

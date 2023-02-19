@@ -3,6 +3,7 @@
 namespace App\Models\Ventas;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Venta
@@ -34,6 +35,16 @@ class Venta extends Model
     protected $casts = [
         'fecha_de_retiro' => 'datetime:Y-m-d',
     ];
+
+    /**
+     * Get the presupuesto associated with the Venta
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function presupuesto(): HasOne
+    {
+        return $this->hasOne(Presupuesto::class);
+    }
 
 
 

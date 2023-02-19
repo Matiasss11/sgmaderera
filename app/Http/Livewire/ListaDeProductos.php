@@ -12,24 +12,18 @@ use App\Models\Sistema\Movimiento;
 use App\Models\Ventas\FormaPago;
 use App\Models\Ventas\Venta;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class ListaDeProductos extends Component
 {   
-	// protected $sucursalesService;
-
-	// public function __construct(
-	// 	SucursalesService $sucursalesService
-	// ) {
-	// 	$this->sucursalesService = $sucursalesService;
-	// }
-
-    // Inputs
+	// Inputs
     public $cantidad;
     public $producto_id;
     public $precio_total;
     public $stock;
     public $fecha_de_retiro;
+    public $cliente_id;
 
     // Collections
     public $productos;
@@ -127,13 +121,15 @@ class ListaDeProductos extends Component
 
     /** */
     public function ejecutarReserva(){
-        $venta = Venta::create([
+        $cliente = Cliente::find($this->cliente_id);
+        Log::info($cliente);
+        $venta   = Venta::create([
             'user_id'         => Auth::user()->id,
             'fecha_de_retiro' => $this->fecha_de_retiro, 
             'precio_total'    => $this->precio_total,
             'sucursal_id'     => Auth::user()->sucursal_id,
         ]);
-        $this->guardarPresupuesto($venta->id);
+        $this->guardarPresupuesto($venta->id,$cliente->id);
         $this->registrarMovimiento($venta->id);
         return redirect()->route('reservas.index');
     }
@@ -169,7 +165,7 @@ class ListaDeProductos extends Component
     }
 
     /** Guardar presupuesto, guardar lista y eliminar elementos previos y guardar los nuevos */
-    public function guardarPresupuesto($venta_id = null){
+    public function guardarPresupuesto($venta_id = null, $cliente){
         // Obtener presupuesto
         if ($this->presupuesto_id) {
             Presupuesto::find($this->presupuesto_id)->update(['venta_id' => $venta_id]);
@@ -177,6 +173,7 @@ class ListaDeProductos extends Component
             $presupuesto = Presupuesto::create([
                 'venta_id'    => $venta_id,
                 'sucursal_id' => Auth::user()->id,
+                'cliente_id'  => $cliente,
             ]);
             $this->presupuesto_id = $presupuesto->id;
         }
