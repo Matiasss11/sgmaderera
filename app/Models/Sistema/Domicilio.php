@@ -14,6 +14,7 @@ class Domicilio extends Model
         'piso',
         'departamento',
         'numero',
+        'calle',
         'calle_id',
         'ciudad_id',
     ];

@@ -14,6 +14,9 @@ class Cliente extends Model
 {
     use HasFactory;
 
+    const CLIENTE_PARTICULAR    = 1;
+    const CLIENTE_INSTITUCIONAL = 2;
+
     protected $perPage = 10;
 
     /**

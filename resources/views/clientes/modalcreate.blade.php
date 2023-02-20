@@ -100,13 +100,22 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label for="direccion">
+                                <label for="calle">
                                     Calle
                                 </label>
-                                <input type="string"name="direccion"value="{{old('direccion')}}"class="form-control"
-                                    placeholder="Introdusca la direccion"title="Introduzca la direccion"required>
+                                <input type="string"name="calle"value="{{old('calle')}}"class="form-control"
+                                    placeholder="Introdusca la calle"title="Introduzca la calle"required>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="numero">
+                                    Numero
+                                </label>
+                                <input type="string"name="numero"value="{{old('numero')}}"class="form-control"
+                                    placeholder="Introdusca el numero"title="Introduzca el numero">
                             </div>
                         </div>
                         <div class="col-4">
@@ -131,7 +140,6 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group" style="text-align:center">
-                        <br>
                         <button title="Limpiar" class="btn btn-danger" type="reset"><i class="fa fa-eraser"></i> Limpiar</button>
                         <button title="Guardar" id="confirmar" class="btn btn-primary" type="submit"> <i class="fa fa-check"></i> Guardar</button>
                     </div>
