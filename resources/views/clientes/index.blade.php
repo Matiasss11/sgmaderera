@@ -49,7 +49,7 @@
                     
                     <tr style="text-align:center" onmouseover="cambiar_color_over(this)" onmouseout="cambiar_color_out(this)">
                         @if (isset($cliente->nombre))
-                            <td>{{ $cliente->Apellido }} {{$cliente->nombre}}</td>    
+                            <td>{{ $cliente->apellido }} {{$cliente->nombre}}</td>    
                         @else
                             <td>{{ $cliente->razon_social }}</td>
                         @endif

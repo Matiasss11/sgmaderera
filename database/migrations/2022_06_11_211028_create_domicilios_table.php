@@ -17,7 +17,7 @@ class CreateDomiciliosTable extends Migration
             $table->bigIncrements('id');
             $table->string('piso')->nullable();
             $table->string('departamento')->nullable();
-            $table->string('callee')->nullable();
+            $table->string('direccion')->nullable();
             $table->string('numero')->nullable();
             $table->unsignedBigInteger('calle_id')->nullable();
             $table->unsignedBigInteger('ciudad_id');

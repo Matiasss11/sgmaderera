@@ -208,7 +208,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" wire:click="ejecutarReserva({{$cliente->id}},{{$atencion}})">Reservar</button>
+                        <button type="button" class="btn btn-primary" wire:click="ejecutarReserva({{$cliente->id}},{{$atencion}},{{$forma->id}})">Reservar</button>
                     </div>
             </div>
         </div>
@@ -273,7 +273,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" wire:click="ejecutarVenta({{$cliente->id}},{{$atencion}})">Ejecutar venta</button>
+                        <button type="button" class="btn btn-primary" wire:click="ejecutarVenta({{$cliente->id}},{{$atencion}},{{$forma->id}})">Ejecutar venta</button>
                     </div>
             </div>
         </div>

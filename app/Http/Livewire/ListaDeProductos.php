@@ -120,6 +120,11 @@ class ListaDeProductos extends Component
     public function ejecutarVenta(){
         $cliente = Cliente::find($this->cliente_id);
         Log::info($cliente);
+        if ($this->atencion == "telefonica") {
+            $atencion = Presupuesto::ATENCION_TELEFONICA;
+        } else {
+            $atencion = Presupuesto::ATENCION_MOSTRADOR;
+        }
         $forma_pago = FormaPago::find($this->forma_pago_id);
         $venta = Venta::create([
             'user_id'      => Auth::user()->id,
@@ -136,6 +141,11 @@ class ListaDeProductos extends Component
     public function ejecutarReserva(){
         $cliente = Cliente::find($this->cliente_id);
         Log::info($cliente);
+        if ($this->atencion == "telefonica") {
+            $atencion = Presupuesto::ATENCION_TELEFONICA;
+        } else {
+            $atencion = Presupuesto::ATENCION_MOSTRADOR;
+        }
         $forma_pago = FormaPago::find($this->forma_pago_id);
         $venta   = Venta::create([
             'user_id'         => Auth::user()->id,
@@ -186,7 +196,7 @@ class ListaDeProductos extends Component
         }else {
             $presupuesto = Presupuesto::create([
                 'venta_id'       => $venta_id,
-                'sucursal_id'    => Auth::user()->id,
+                'sucursal_id'    => Auth::user()->sucursal_id,
                 'atencion'       => $atencion,
                 'forma_pago_id'  => $forma_pago_id,
                 'cliente_id'     => $cliente,
