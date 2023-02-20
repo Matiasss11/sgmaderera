@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Presupuesto extends Model
 {
+    const ATENCION_TELEFONICA = 1;
+    CONST ATENCION_MOSTRADOR  = 2;
     
     static $rules = [
     ];

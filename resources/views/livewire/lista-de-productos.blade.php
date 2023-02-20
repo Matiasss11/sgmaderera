@@ -28,9 +28,11 @@
 
     <div class="box-footer mt20">
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAgregarProductos">Agregar productos</button>
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalSeleccionarCliente">Agregar Cliente</button>
-        <button type="button" class="btn btn-primary" wire:click='guardar'>Guardar presupuesto</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalReserva">Ejecutar reserva</button>
+        {{-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalSeleccionarCliente">Agregar Cliente</button> --}}
+        {{-- <button type="button" class="btn btn-primary" wire:click='guardar'>Guardar presupuesto</button> --}}
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalGuardar">Guardar presupuesto</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalReserva">Reservar</button>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalSeleccionarCliente">Vender</button>
         {{-- <button type="button" class="btn btn-primary" wire:click='ejecutarVenta'>Ejecutar venta</button> --}}
     </div>
 
@@ -78,6 +80,65 @@
                         {{-- @if (isset($product) && $cantidad) --}}
                             <button type="button" class="btn btn-primary" wire:click="agregarProductos({{$producto->id}},{{$cantidad}})">Agregar</button>
                         {{-- @endif --}}
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalGuardar" tabindex="-1" aria-labelledby="Label" aria-hidden="true" wire:ignore>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="card-body">
+                            {{-- Lista de Clientes --}}
+                            <div class="form-group">
+                                <label for="cliente_id">Cliente</label>
+                                <select class="custom-select" wire:model="cliente_id" style="width: 100%"required>
+                                    <option value="">Seleccione un cliente</option>
+                                        @if ($clientes)
+                                            @foreach ($clientes as $cliente)
+                                                <option value="{{$cliente->id}}">
+                                                    @if (@isset($cliente->nombre))
+                                                        {{$cliente->nombre}} {{$cliente->apellido}}
+                                                    @else
+                                                        {{$cliente->razon_social}}
+                                                    @endif
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </option>
+                                </select>
+                            </div>
+                            {{-- <div class="form-group">
+                                <label for="forma_pago_id"> Foma de Pago</label>
+                                <select name="forma_pago_id" wire:model="forma_pago_id" id="forma_pago_id"class="custom-select"required>
+                                    <option value="0"disabled="true"selected="true"title="-Seleccione una opcion-">
+                                        -Seleccione una opcion-
+                                    </option>
+                                    @foreach ($formas as $forma)
+                                        <option
+                                            value="{{$forma->id}}">{{$forma->nombre}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div> --}}
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" wire:model="atencion" value="telefonica">
+                                    Atencion Telefonica
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" wire:model="atencion" value="mostrador">
+                                    Atencion en Mostrador
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" wire:click="guardar({{$cliente->id}},{{$atencion}})">Guardar presupuesto</button>
                     </div>
             </div>
         </div>
@@ -131,13 +192,91 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" wire:model="atencion" value="telefonica">
+                                    Atencion Telefonica
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" wire:model="atencion" value="mostrador">
+                                    Atencion en Mostrador
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" wire:click="ejecutarReserva({{$cliente->id}})">Reservar</button>
+                        <button type="button" class="btn btn-primary" wire:click="ejecutarReserva({{$cliente->id}},{{$atencion}})">Reservar</button>
                     </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalSeleccionarCliente" tabindex="-1" aria-labelledby="Label" aria-hidden="true" wire:ignore>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            {{-- Lista de Clientes --}}
+                            <div class="form-group">
+                                <label for="cliente_id">Cliente</label>
+                                <select name="cliente_id"id="cliente_id"class="custom-select"required>
+                                    <option value="0"disabled="true"selected="true"title="-Seleccione una opcion-">
+                                        -Seleccione una opcion-
+                                    </option>
+                                    @foreach ($clientes as $cliente)
+                                        <option
+                                            value="{{$cliente->id}}">
+                                            @if (@isset($cliente->nombre))
+                                                {{$cliente->nombre}} {{$cliente->apellido}}
+                                            @else
+                                                {{$cliente->razon_social}}
+                                            @endif
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="forma_pago_id"> Foma de Pago</label>
+                                <select name="forma_pago_id"id="forma_pago_id"class="custom-select"required>
+                                    <option value="0"disabled="true"selected="true"title="-Seleccione una opcion-">
+                                        -Seleccione una opcion-
+                                    </option>
+                                    @foreach ($formas as $forma)
+                                        <option
+                                            value="{{$forma->id}}">{{$forma->nombre}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" wire:model="atencion" value="telefonica">
+                                    Atencion Telefonica
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" wire:model="atencion" value="mostrador">
+                                    Atencion en Mostrador
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" wire:click="ejecutarVenta({{$cliente->id}},{{$atencion}})">Ejecutar venta</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
 </div>

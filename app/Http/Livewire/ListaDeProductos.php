@@ -24,6 +24,8 @@ class ListaDeProductos extends Component
     public $stock;
     public $fecha_de_retiro;
     public $cliente_id;
+    public $atencion;
+    public $forma_pago_id;
 
     // Collections
     public $productos;
@@ -102,18 +104,29 @@ class ListaDeProductos extends Component
 
     /** Guardar presupuesto y redireccionar al index */
     public function guardar(){
-        $this->guardarPresupuesto();
+        $cliente = Cliente::find($this->cliente_id);
+        Log::info($cliente);
+        if ($this->atencion == "telefonica") {
+            $atencion = Presupuesto::ATENCION_TELEFONICA;
+        } else {
+            $atencion = Presupuesto::ATENCION_MOSTRADOR;
+        }
+        
+        $this->guardarPresupuesto(null,$atencion,null,$cliente->id);
         return redirect()->route('presupuestos.index');
     }
 
     /** */
     public function ejecutarVenta(){
+        $cliente = Cliente::find($this->cliente_id);
+        Log::info($cliente);
+        $forma_pago = FormaPago::find($this->forma_pago_id);
         $venta = Venta::create([
             'user_id'      => Auth::user()->id,
             'precio_total' => $this->precio_total,
             'sucursal_id'  => Auth::user()->sucursal_id,
         ]);
-        $this->guardarPresupuesto($venta->id);
+        $this->guardarPresupuesto($venta->id, $this->atencion, $forma_pago->id, $cliente->id);
         $this->descontarStock($venta->id);
         $this->registrarMovimiento($venta->id);
         return redirect()->route('ventas.index');
@@ -123,13 +136,14 @@ class ListaDeProductos extends Component
     public function ejecutarReserva(){
         $cliente = Cliente::find($this->cliente_id);
         Log::info($cliente);
+        $forma_pago = FormaPago::find($this->forma_pago_id);
         $venta   = Venta::create([
             'user_id'         => Auth::user()->id,
             'fecha_de_retiro' => $this->fecha_de_retiro, 
             'precio_total'    => $this->precio_total,
             'sucursal_id'     => Auth::user()->sucursal_id,
         ]);
-        $this->guardarPresupuesto($venta->id,$cliente->id);
+        $this->guardarPresupuesto($venta->id, $this->atencion, $forma_pago->id, $cliente->id);
         $this->registrarMovimiento($venta->id);
         return redirect()->route('reservas.index');
     }
@@ -165,15 +179,17 @@ class ListaDeProductos extends Component
     }
 
     /** Guardar presupuesto, guardar lista y eliminar elementos previos y guardar los nuevos */
-    public function guardarPresupuesto($venta_id = null, $cliente){
+    public function guardarPresupuesto($venta_id = null, $atencion = null, $forma_pago_id = null, $cliente){
         // Obtener presupuesto
         if ($this->presupuesto_id) {
             Presupuesto::find($this->presupuesto_id)->update(['venta_id' => $venta_id]);
         }else {
             $presupuesto = Presupuesto::create([
-                'venta_id'    => $venta_id,
-                'sucursal_id' => Auth::user()->id,
-                'cliente_id'  => $cliente,
+                'venta_id'       => $venta_id,
+                'sucursal_id'    => Auth::user()->id,
+                'atencion'       => $atencion,
+                'forma_pago_id'  => $forma_pago_id,
+                'cliente_id'     => $cliente,
             ]);
             $this->presupuesto_id = $presupuesto->id;
         }

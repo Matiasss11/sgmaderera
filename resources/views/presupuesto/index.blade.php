@@ -40,7 +40,12 @@
                                     @foreach ($presupuestos as $presupuesto)
                                         <tr>
                                             <td>{{ $presupuesto->id }}</td>
-											<td>Pendiente</td>
+											<td>@if (isset($presupuesto->cliente))
+                                                    {{$presupuesto->cliente->nombre}} {{$presupuesto->cliente->apellido}}
+                                                @else
+                                                    {{$presupuesto->cliente->razon_social}}
+                                                @endif
+                                            </td>
 											<td>{{ $presupuesto->created_at }}</td>
                                             <td>
                                                 <form action="{{ route('presupuestos.destroy',$presupuesto->id) }}" method="POST">

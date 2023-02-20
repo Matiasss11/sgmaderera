@@ -41,7 +41,12 @@
                                     @foreach ($ventas as $venta)
                                         <tr>
                                             <td>{{ $venta->id }}</td>
-                                            <td>Cliente</td>
+                                            <td>@if (isset($venta->presupuesto->cliente))
+                                                    {{$venta->presupuesto->cliente->nombre}} {{$venta->presupuesto->cliente->apellido}}
+                                                @else
+                                                    {{$venta->presupuesto->cliente->razon_social}}
+                                                @endif
+                                            </td>
                                             <td>{{$venta->created_at->format('d M, Y');}}</td>
                                             <td>${{ number_format($venta->precio_total, 2, '.', ',')}}</td>
                                             <td>
