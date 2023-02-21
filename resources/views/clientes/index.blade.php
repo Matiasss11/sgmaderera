@@ -12,7 +12,7 @@
         @include('errors.request')
         <div class="card-header">
             <div class="card-title">
-                <p style="font-size:130%"> <i aria-hidden="true"></i> Indice de Clientes</p>
+                <p style="font-size:130%"> <i aria-hidden="true"></i>Clientes</p>
             </div>
             <div class="card-tools">
                 <a data-keyboard="false" data-target="#modal-create" data-toggle="modal">
@@ -114,6 +114,8 @@
             return false;
     }
   </script>
+
+<script src="{{asset('js/tablaDetalle.js')}}"></script>
 
 @endpush
 @endsection

@@ -21,7 +21,7 @@ class ReservaController extends Controller
         $ventas = Venta::whereNotNull('fecha_de_retiro')
                         ->where('sucursal_id', Auth::user()->id)
                         ->paginate(10);
-
+        // dd($ventas);
         return view('reserva.index', compact('ventas'))
             ->with('i', (request()->input('page', 1) - 1) * $ventas->perPage());
     }

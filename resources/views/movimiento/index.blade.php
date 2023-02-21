@@ -14,13 +14,14 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         @include('errors.request')
         <div class="card-body">
-        <p style="font-size:180%"> <i aria-hidden="true"></i> Indice de Movimientos</p>
+        <p style="font-size:130%"> <i aria-hidden="true"></i>Movimientos</p>
         <hr>
-            <h4><i class="fa fa-filter" aria-hidden="true"></i> Filtrar</h4>
+            <h6><i class="fa fa-filter" aria-hidden="true"></i> Filtrar</h6>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            {{-- @include('movimiento.search') --}}
+                @include('movimiento.search')
             <br>
             </div>
+
             <table id="tablaDetalle" style="width:100%" class="table table-striped table-hover">
                 <thead style="background-color:#fff">
                     <tr style="text-align:center" class="text-uppercase text-dark">

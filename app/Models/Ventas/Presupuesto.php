@@ -35,7 +35,7 @@ class Presupuesto extends Model
      *
      * @var array
      */
-    protected $fillable = ['atencion','cliente_id','venta_id','sucursal_id'];
+    protected $fillable = ['atencion','cliente_id','venta_id','sucursal_id','forma_pago_id'];
 
 
     /**

@@ -126,12 +126,13 @@ class ListaDeProductos extends Component
             $atencion = Presupuesto::ATENCION_MOSTRADOR;
         }
         $forma_pago = FormaPago::find($this->forma_pago_id);
+        // dd($forma_pago);
         $venta = Venta::create([
             'user_id'      => Auth::user()->id,
             'precio_total' => $this->precio_total,
             'sucursal_id'  => Auth::user()->sucursal_id,
         ]);
-        $this->guardarPresupuesto($venta->id, $this->atencion, $forma_pago->id, $cliente->id);
+        $this->guardarPresupuesto($venta->id, $atencion, $forma_pago->id, $cliente->id);
         $this->descontarStock($venta->id);
         $this->registrarMovimiento($venta->id);
         return redirect()->route('ventas.index');
@@ -153,7 +154,7 @@ class ListaDeProductos extends Component
             'precio_total'    => $this->precio_total,
             'sucursal_id'     => Auth::user()->sucursal_id,
         ]);
-        $this->guardarPresupuesto($venta->id, $this->atencion, $forma_pago->id, $cliente->id);
+        $this->guardarPresupuesto($venta->id, $atencion, $forma_pago->id, $cliente->id);
         $this->registrarMovimiento($venta->id);
         return redirect()->route('reservas.index');
     }
@@ -256,9 +257,9 @@ class ListaDeProductos extends Component
         $venta = Venta::find($venta_id);
 
         Movimiento::create([
-            'monto'         => $venta->precio_total,
-            'sucursal_id'   =>  Auth::user()->sucursal_id,
-            'operacion_id'  => $venta->id,
+            'monto'                  => $venta->precio_total,
+            'sucursal_id'            => Auth::user()->sucursal_id,
+            'operacion_id'           => $venta->id,
             'subtipo_movimiento_id'  => 1,
         ]);
 

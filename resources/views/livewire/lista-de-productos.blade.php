@@ -181,15 +181,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="forma_pago_id"> Foma de Pago</label>
-                                <select name="forma_pago_id"id="forma_pago_id"class="custom-select"required>
-                                    <option value="0"disabled="true"selected="true"title="-Seleccione una opcion-">
-                                        -Seleccione una opcion-
+                                <select class="custom-select" wire:model="forma_pago_id" style="width: 100%"required>
+                                    <option value="">Seleccione una forma de pago</option>
+                                        @if ($clientes)
+                                            @foreach ($formas as $forma_pago)
+                                                <option value="{{$forma_pago->id}}"> {{$forma_pago->nombre}}
+                                                </option>
+                                            @endforeach
+                                        @endif
                                     </option>
-                                    @foreach ($formas as $forma)
-                                        <option
-                                            value="{{$forma->id}}">{{$forma->nombre}}
-                                        </option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-check">
@@ -208,7 +208,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" wire:click="ejecutarReserva({{$cliente->id}},{{$atencion}},{{$forma->id}})">Reservar</button>
+                        <button type="button" class="btn btn-primary" wire:click="ejecutarReserva({{$cliente->id}},{{$atencion}})">Reservar</button>
                     </div>
             </div>
         </div>
@@ -228,33 +228,33 @@
                             {{-- Lista de Clientes --}}
                             <div class="form-group">
                                 <label for="cliente_id">Cliente</label>
-                                <select name="cliente_id"id="cliente_id"class="custom-select"required>
-                                    <option value="0"disabled="true"selected="true"title="-Seleccione una opcion-">
-                                        -Seleccione una opcion-
+                                <select class="custom-select" wire:model="cliente_id" style="width: 100%"required>
+                                    <option value="">Seleccione un cliente</option>
+                                        @if ($clientes)
+                                            @foreach ($clientes as $cliente)
+                                                <option value="{{$cliente->id}}">
+                                                    @if (@isset($cliente->nombre))
+                                                        {{$cliente->nombre}} {{$cliente->apellido}}
+                                                    @else
+                                                        {{$cliente->razon_social}}
+                                                    @endif
+                                                </option>
+                                            @endforeach
+                                        @endif
                                     </option>
-                                    @foreach ($clientes as $cliente)
-                                        <option
-                                            value="{{$cliente->id}}">
-                                            @if (@isset($cliente->nombre))
-                                                {{$cliente->nombre}} {{$cliente->apellido}}
-                                            @else
-                                                {{$cliente->razon_social}}
-                                            @endif
-                                        </option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="forma_pago_id"> Foma de Pago</label>
-                                <select name="forma_pago_id"id="forma_pago_id"class="custom-select"required>
-                                    <option value="0"disabled="true"selected="true"title="-Seleccione una opcion-">
-                                        -Seleccione una opcion-
+                                <select class="custom-select" wire:model="forma_pago_id" style="width: 100%"required>
+                                    <option value="">Seleccione una forma de pago</option>
+                                        @if ($clientes)
+                                            @foreach ($formas as $forma_pago)
+                                                <option value="{{$forma_pago->id}}"> {{$forma_pago->nombre}}
+                                                </option>
+                                            @endforeach
+                                        @endif
                                     </option>
-                                    @foreach ($formas as $forma)
-                                        <option
-                                            value="{{$forma->id}}">{{$forma->nombre}}
-                                        </option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-check">
@@ -273,7 +273,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" wire:click="ejecutarVenta({{$cliente->id}},{{$atencion}},{{$forma->id}})">Ejecutar venta</button>
+                        <button type="button" class="btn btn-primary" wire:click="ejecutarVenta({{$cliente->id}},{{$atencion}})">Ejecutar venta</button>
                     </div>
             </div>
         </div>
