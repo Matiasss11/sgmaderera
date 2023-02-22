@@ -16,7 +16,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-10">
-                    <p style="font-size:180%"> <i aria-hidden="true"></i> Indice de Roles</p>
+                    <p style="font-size:130%"> <i aria-hidden="true"></i>Roles</p>
                     
                 </div>
                 <div class="col-2">

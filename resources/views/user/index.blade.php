@@ -17,7 +17,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-10">
-                    <p style="font-size:180%"> <i aria-hidden="true"></i> Indice de Usuarios</p>
+                    <p style="font-size:130%"> <i aria-hidden="true"></i>Usuarios</p>
                     
                 </div>
                 <div class="col-2">
@@ -32,7 +32,7 @@
             </div>
             
         <hr>
-            <h4><i class="fa fa-filter" aria-hidden="true"></i> Filtrar</h4>
+            {{-- <h4><i class="fa fa-filter" aria-hidden="true"></i> Filtrar</h4> --}}
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             {{-- @include('user.search') --}}
             <br>

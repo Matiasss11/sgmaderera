@@ -72,7 +72,7 @@ class MovimientoController extends Controller
 
             $hoy=date('Y-m-d');
             //$movimientos=Movimiento::whereTipo_movimiento_id(1)->orderBy('created_at','desc')->get();
-            $movimientos=Movimiento::whereCreated_at($hoy)->orderBy('created_at','desc')->get();
+            $movimientos=Movimiento::whereFecha($hoy)->orderBy('created_at','desc')->get();
             //dd($hoy);
         }
 

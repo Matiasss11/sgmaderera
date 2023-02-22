@@ -258,6 +258,7 @@ class ListaDeProductos extends Component
 
         Movimiento::create([
             'monto'                  => $venta->precio_total,
+            'fecha'                  => now(),
             'sucursal_id'            => Auth::user()->sucursal_id,
             'operacion_id'           => $venta->id,
             'subtipo_movimiento_id'  => 1,

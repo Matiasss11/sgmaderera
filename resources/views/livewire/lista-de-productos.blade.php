@@ -58,10 +58,11 @@
                                     <option value="">Seleccione un producto</option>
                                         @if ($productos)
                                             @foreach ($productos as $producto)
-                                                <option value="{{$producto->id}}">{{$producto->nombre}}</option>
+                                                <option value="{{$producto->id}}">{{$producto->nombre}}
                                             @endforeach
                                         @endif
-                                    </select>
+                                    </option>
+                                </select>
                             </div>
                             {{-- Cantidad --}}
                             <div class="form-group">
@@ -109,19 +110,6 @@
                                     </option>
                                 </select>
                             </div>
-                            {{-- <div class="form-group">
-                                <label for="forma_pago_id"> Foma de Pago</label>
-                                <select name="forma_pago_id" wire:model="forma_pago_id" id="forma_pago_id"class="custom-select"required>
-                                    <option value="0"disabled="true"selected="true"title="-Seleccione una opcion-">
-                                        -Seleccione una opcion-
-                                    </option>
-                                    @foreach ($formas as $forma)
-                                        <option
-                                            value="{{$forma->id}}">{{$forma->nombre}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
                             <div class="form-check">
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="radio" wire:model="atencion" value="telefonica">
@@ -280,3 +268,4 @@
     </div>
 
 </div>
+
