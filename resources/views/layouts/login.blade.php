@@ -23,9 +23,7 @@
         @import url('https://fonts.googleapis.com/css?family=Numans');
 
         html,body{
-            background: linear-gradient(brown, brown, #FFFFFF);
-            /*background-size: auto;
-            background-repeat: no-repeat;*/
+            background: #e8e8e8;
             height: 100%;
             font-family: 'Numans', sans-serif;
         }
@@ -36,14 +34,16 @@
         }
 
         .card{
-            height: 370px;
-            margin-top: auto;
-            margin-bottom: auto;
-            padding: 5px;
-            width: 400px;
-            background: linear-gradient(#FEFEFF, #C1BCD7, #B6B1D2, #9D97C1, #8880AF, #625B8C);
-            border-radius: 15px;
-            box-shadow: 8px 10px #000;
+            position: relative;
+            top: 10vw;
+            display: flex;
+            flex-direction: column;
+            background-color: #440b79;
+            max-height: 450px;
+            max-width: 300px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 17px 17px 10px 3px #1b003528;
         }
 
         .social_icon span{
@@ -57,11 +57,19 @@
             cursor: pointer;
         }
 
-        .card-header h3{
-            color: black;
-            text-align: center;
+        .login label{
+            margin: 25% 0 5%;
         }
 
+        label {
+            color: #fff;
+            font-size: 2rem;
+            justify-content: center;
+            display: flex;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .5s ease-in-out;
+        }
         .social_icon{
             position: absolute;
             right: 20px;
@@ -75,10 +83,20 @@
             border:0 !important;
         }
 
+        input {
+            width: 100%;
+            height: 40px;
+            background: #e0dede;
+            padding: 10px;
+            border: none;
+            outline: none;
+            border-radius: 8px;
+        }
+
         input:focus{
             outline: 0 0 0 0  !important;
             box-shadow: 0 0 0 0 !important;
-            }
+        }
 
         .remember{
             color: white;
@@ -92,17 +110,22 @@
         }
 
         .login_btn{
-            color: rgb(245, 241, 241);
-            background-color:  brown;
-            border-radius: 20px 1px;
-            border: 1px solid white;
-            width: 150px;
+            width: 85%;
+            height: 40px;
+            margin: 12px auto 10%;
+            color: #fff;
+            background: #573b8a;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: .2s ease-in;
         }
 
         .login_btn:hover{
-            color:brown;
-            background-color: white;
-            border: 1px solid brown;
+            background-color: #7459a5;
+            border: 1px solid #573b8a;
         }
 
         .links{
@@ -113,29 +136,48 @@
             margin-left: 4px;
         }
 
+        .app {
+            background: #eee;
+            border-radius: 90% / 45%;
+            transform: translateY(-40%);
+            transition: .8s ease-in-out;
+        }
+
+        .app label {
+            color: #573b8a;
+            transform: scale(.6);
+        }
+
+        #chk:checked ~ .app {
+            transform: translateY(-60%);
+        }
+
+        #chk:checked ~ .app label {
+            transform: scale(1);
+            margin: 10% 0 5%;
+        }
+
+        #chk:checked ~ .login label {
+            transform: scale(.6);
+            margin: 5% 0 5%;
+        } 
+
     </style>
 
 </head>
 <body>
 @include('errors.request')
 	<div class="d-flex justify-content-center h-100">
-		<div class="card text-white bg-dark">
-			<div class="card-header"><br>
-				<h3>Iniciar Sesión</h3>
-				<!--div class="d-flex justify-content-end social_icon">
-					<span><i class="fab fa-facebook-square"></i></span>
-					<span><i class="fab fa-google-plus-square"></i></span>
-					<span><i class="fab fa-twitter-square"></i></span>
-				</div-->
+		<div class="card text-white ">
+			<div class="login"><br>
+				<label for="login">Iniciar Sesión</label>
 			</div>
 			<div class="card-body">
                 @yield('content')
 			</div>
-			<!--div class="card-footer">
-				<div class="d-flex justify-content-center">
-					<a href="#">¿Te has olvidado la contraseña?</a>
-				</div>
-			</div-->
+            <div class="app">
+                <label for="chk" aria-hidden="true">Maderas Ecke</label>
+            </div>
 		</div>
 	</div>
 </body>

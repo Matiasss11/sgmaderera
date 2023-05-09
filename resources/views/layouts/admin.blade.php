@@ -43,10 +43,10 @@
  </style-->
     <style>
         .sidebar-dark-blue{
-            background: rgb(116, 29, 29) !important;
+            background: #455279 !important;
         }
         .navbar-blue {
-            background: rgb(116, 29, 29) !important;
+            background: #455279 !important;
         }
         /* Este es para los elementos en general */
         .navbar-light .navbar-nav .nav-link {
