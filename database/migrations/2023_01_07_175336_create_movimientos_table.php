@@ -16,6 +16,7 @@ class CreateMovimientosTable extends Migration
         Schema::create('movimientos', function (Blueprint $table) {
             $table->id();
             $table->double('monto');
+            $table->date('fecha');
             $table->integer('sucursal_id');
             $table->integer('operacion_id');
             $table->foreignId('subtipo_movimiento_id')->constrained('subtipo_movimientos');

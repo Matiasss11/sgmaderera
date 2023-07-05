@@ -30,5 +30,9 @@ class FormaPagoSeeder extends Seeder
             'nombre' => 'Cheque',
             'descripcion' => 'Pago con cheque'
         ]);
+        FormaPago::create([
+            'nombre' => 'Cuenta Corriente',
+            'descripcion' => 'El cliente tiene una cuenta corriente'
+        ]);
     }
 }

@@ -15,7 +15,7 @@ class Movimiento extends Model
     * @var array
     */
    protected $fillable = [
-      'monto', 'subtipo_movimiento_id', 'sucursal_id', 'operacion_id'
+      'monto', 'fecha', 'subtipo_movimiento_id', 'sucursal_id', 'operacion_id'
    ];
  
    public function subtipo_movimiento()

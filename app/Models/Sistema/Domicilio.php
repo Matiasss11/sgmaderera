@@ -2,6 +2,7 @@
 
 namespace App\Models\Sistema;
 
+use App\Models\Clientes\Cliente;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,20 +13,27 @@ class Domicilio extends Model
     protected $fillable = [
         'piso',
         'departamento',
-        'direccion',
+        'numero',
+        'calle',
+        'calle_id',
         'ciudad_id',
     ];
 
     protected $table = 'domicilios';
+
+    public function calle()
+    {
+        return $this->belongsTo(Calle::class);
+    }
 
     public function ciudad()
     {
         return $this->belongsTo(Ciudad::class);
     }
 
-    public function persona()
+    public function clientes()
     {
-        return $this->hasOne(Persona::class);
+        return $this->belongsToMany(Cliente::class);
     }
 
     public function empresa()

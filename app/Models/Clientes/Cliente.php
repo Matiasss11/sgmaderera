@@ -2,16 +2,22 @@
 
 namespace App\Models\Clientes;
 
+use App\Models\Sistema\Ciudad;
 use App\Models\Sistema\Domicilio;
 use App\Models\Ventas\FormaPago;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\DB;
 
 class Cliente extends Model
 {
     use HasFactory;
+
+    const CLIENTE_PARTICULAR    = 1;
+    const CLIENTE_INSTITUCIONAL = 2;
 
     protected $perPage = 10;
 
@@ -34,13 +40,13 @@ class Cliente extends Model
         'tipo_cliente_id'];
 
     /**
-     * Get the domicilio associated with the Cliente
+     * The domicilios that belong to the Cliente
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function domicilio(): HasOne
+    public function domicilios(): BelongsToMany
     {
-        return $this->hasOne(Domicilio::class);
+        return $this->belongsToMany(Domicilio::class);
     }
 
     /**
@@ -51,5 +57,14 @@ class Cliente extends Model
     public function formaPago(): BelongsTo
     {
         return $this->belongsTo(FormaPago::class);
+    }
+
+    public function ciudad()
+    {
+        $domicilio = DB::table('domicilio_cliente')->whereCliente_id($this->id)->first();
+        $ubicacion = Domicilio::find($domicilio->id);
+        $ciudad    = Ciudad::find($ubicacion->ciudad_id);
+        $lugar     = $ciudad->nombre;
+        return $lugar;
     }
 }

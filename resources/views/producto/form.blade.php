@@ -14,7 +14,7 @@
             <div class="col-3">
                 <div class="form-group">
                     {{ Form::label('stock') }}
-                    {{ Form::number('stock', $producto->stock, ['class' => 'form-control' . ($errors->has('stock') ? ' is-invalid' : ''), 'placeholder' => 'Stock']) }}
+                    {{ Form::text('stock', $producto->stock, ['class' => 'form-control' . ($errors->has('stock') ? ' is-invalid' : ''), 'placeholder' => 'Stock']) }}
                     {!! $errors->first('stock', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <div class="col-3">
                 <div class="form-group">
                     {{ Form::label('precio base') }}
-                    {{ Form::number('precio_base', $producto->precio_base, ['class' => 'form-control' . ($errors->has('precio_base') ? ' is-invalid' : ''), 'placeholder' => 'Precio Base']) }}
+                    {{ Form::text('precio_base', $producto->precio_base, ['class' => 'form-control' . ($errors->has('precio_base') ? ' is-invalid' : ''), 'placeholder' => 'Precio Base']) }}
                     {!! $errors->first('precio_base', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>

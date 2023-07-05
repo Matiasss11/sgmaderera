@@ -1,7 +1,7 @@
 
 {!! Form::model(Request::only(
-    ['desde','hasta', 'subtipo_movimiento_id', 'tipo_movimiento_id']),
-    ['url' => 'movimiento', 'method'=>'GET', 'autocomplete'=>'on', 'role'=>'search'] 
+    ['desde','hasta'/*, 'subtipo_movimiento_id', 'tipo_movimiento_id'*/]),
+    ['url' => 'movimientos', 'method'=>'GET', 'autocomplete'=>'on', 'role'=>'search'] 
     
     )!!}
 
@@ -43,7 +43,7 @@
         >       
     </div>
 
-    <div class="col-2">
+    {{-- <div class="col-2">
         <div class="form-group">
             <label for="tipo_movimiento_id">Movimiento</label>
             <select
@@ -68,9 +68,9 @@
                 </option>
             </select>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="col-2">
+    {{-- <div class="col-2">
         <div class="form-group">
             <label for="subtipo_movimiento_id">Concepto</label>
             <select
@@ -95,36 +95,23 @@
                 </option>
             </select>
         </div>
-    </div>
+    </div> --}}
        
 
     <div class="col-4 "  >
         <label for="">&nbsp;</label>
         <div class="form-group">
-                <button
-                    title="buscar"
-                    type="submit"
-                    id="bt_add"
-                    name="filtrar"
-                    class="btn btn-primary btn-sm">
+                <button title="buscar"type="submit"id="bt_add"name="filtrar"class="btn btn-primary btn-sm">
                     <i class="fa fa-search"></i> Buscar
                 </button>
-                <button 
-                    class="btn btn-danger btn-sm"
-                    name="pdf"
-                    type="submit"
-                    >
+                {{-- <button class="btn btn-danger btn-sm"name="pdf"type="submit">
                     <i class="fas fa-file-pdf fa-md" aria-hidden="true"></i>
                     PDF
-                </button>
-                <a 
-                
-                href= "{{ route('movimiento.index') }}"
-                class="btn btn-default btn-sm"
-                >
-                <i class="fas fa-eraser"></i>
-                    ... Limpiar
-            </a>
+                </button> --}}
+                <a href= "{{ route('movimientos.index') }}"class="btn btn-default btn-sm">
+                    <i class="fas fa-eraser"></i>
+                        ... Limpiar
+                </a>
         </div>
     </div>
     

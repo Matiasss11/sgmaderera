@@ -21,7 +21,7 @@ class SucursalSeeder extends Seeder
             'email'             =>  'maderasEckeSucursal1@email.com',
             'fecha_creacion'    =>  '2020-08-03',
             'empresa_id'        =>  1,
-            'domicilio_id'      =>  1,
+            // 'domicilio_id'      =>  1,
         ]);
 
         Sucursal::create([
@@ -31,7 +31,7 @@ class SucursalSeeder extends Seeder
             'email'             =>  'maderasEckeSucursal2@email.com',
             'fecha_creacion'    =>  '2021-09-01',
             'empresa_id'        =>  1,
-            'domicilio_id'      =>  2
+            // 'domicilio_id'      =>  2
         ]);
     }
 }

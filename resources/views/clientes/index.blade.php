@@ -12,7 +12,7 @@
         @include('errors.request')
         <div class="card-header">
             <div class="card-title">
-                <p style="font-size:130%"> <i aria-hidden="true"></i> Indice de Clientes</p>
+                <p style="font-size:130%"> <i aria-hidden="true"></i>Clientes</p>
             </div>
             <div class="card-tools">
                 <a data-keyboard="false" data-target="#modal-create" data-toggle="modal">
@@ -49,7 +49,7 @@
                     
                     <tr style="text-align:center" onmouseover="cambiar_color_over(this)" onmouseout="cambiar_color_out(this)">
                         @if (isset($cliente->nombre))
-                            <td>{{ $cliente->Apellido }} {{$cliente->nombre}}</td>    
+                            <td>{{ $cliente->apellido }} {{$cliente->nombre}}</td>    
                         @else
                             <td>{{ $cliente->razon_social }}</td>
                         @endif
@@ -114,6 +114,8 @@
             return false;
     }
   </script>
+
+<script src="{{asset('js/tablaDetalle.js')}}"></script>
 
 @endpush
 @endsection

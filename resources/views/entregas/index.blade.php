@@ -8,11 +8,11 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <p style="font-size:130%"> <i aria-hidden="true"></i>Reservas</p>
+                            <p style="font-size:130%"> <i aria-hidden="true"></i>Entregas</p>
 
                             <div class="float-right">
                                 <a href="{{ route('presupuestos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  Nueva 
+                                  Nueva
                                 </a>
                             </div>
                         </div>
@@ -28,30 +28,35 @@
                             <table id="tablaDetalle"  class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
+                                        <th>Estado</th>
                                         <th>Cliente</th>
-                                        <th>Fecha de reserva</th>
-                                        <th>Fecha de retiro</th>
-                                        <th>Precio total</th>
-                                        <th></th>
+                                        {{-- <th>Domicilio</th> --}}
+                                        <th>Fecha de Entrega</th>
+                                        <th>Sucursal</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($ventas as $venta)
+                                    @foreach ($entregas as $entrega)
                                         <tr>
-                                            <td>{{ $venta->id }}</td>
-                                            <td>@if (isset($venta->presupuesto->cliente))
-                                                    {{$venta->presupuesto->cliente->nombre}} {{$venta->presupuesto->cliente->apellido}}
+                                            <td>@if ($entrega->estado_entrega_id == 1)
+                                                    <label style="font-size: 70%" class="badge badge-warning">PENDIENTE</label>
                                                 @else
-                                                    {{$venta->presupuesto->cliente->razon_social}}
+                                                    <label style="font-size: 70%" class="badge badge-success">ENTREGADO</label>
                                                 @endif
                                             </td>
-                                            <td>{{ $venta->created_at->format('d M, Y');}}</td>
-                                            <td>{{ $venta->fecha_de_retiro->format('d M, Y');}}</td>
-                                            <td>${{ number_format($venta->precio_total, 2, '.', ',')}}</td>
+                                            <td>@if (isset($entrega->venta->presupuesto->cliente))
+                                                    {{$entrega->venta->presupuesto->cliente->nombre}} {{$entrega->venta->presupuesto->cliente->apellido}}
+                                                @else
+                                                    {{$entrega->venta->presupuesto->cliente->razon_social}}
+                                                @endif
+                                            </td>
+                                            {{-- <td>{{ $entrega->venta->presupuesto->cliente->ciudad }}</td> --}}
+                                            <td>{{ $entrega->created_at->format('d M, Y'); }}</td>
+                                            <td>{{ $entrega->venta->sucursal() }}</td>
 
                                             <td>
-                                                <a class="btn btn-sm btn-primary " href="{{ route('reservas.show',$venta->id) }}"><i class="fa fa-fw fa-eye"></i> Detalle</a>
+                                                {{-- <a class="btn btn-sm btn-primary " href="{{ route('reservas.show',$venta->id) }}"><i class="fa fa-fw fa-eye"></i> Detalle</a> --}}
                                                 {{-- <a class="btn btn-sm btn-success" href=""><i class="fa fa-fw fa-edit"></i> Editar fecha ???</a> --}}
                                             </td>
                                         </tr>
@@ -61,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $ventas->links() !!}
+                {!! $entregas->links() !!}
             </div>
         </div>
     </div>

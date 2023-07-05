@@ -3,6 +3,7 @@
 namespace App\Models\Ventas;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Venta
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Venta extends Model
 {
-    
+
     static $rules = [
     ];
 
@@ -34,6 +35,30 @@ class Venta extends Model
     protected $casts = [
         'fecha_de_retiro' => 'datetime:Y-m-d',
     ];
+
+    /**
+     * Get the presupuesto associated with the Venta
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function presupuesto(): HasOne
+    {
+        return $this->hasOne(Presupuesto::class);
+    }
+
+    public function sucursal()
+    {
+        return $this->presupuesto->sucursal->razon_social;
+    }
+
+    public function cliente()
+    {
+        if ($this->presupuesto->cliente->razon_social != null) {
+            return $this->presupuesto->cliente->razon_social;
+        } else {
+            return $this->presupuesto->cliente->nombre  + ' ' + $this->presupuesto->cliente->apellido;
+        }
+    }
 
 
 
