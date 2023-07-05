@@ -3,6 +3,7 @@
 namespace App\Models\Ventas;
 
 use App\Models\Clientes\Cliente;
+use App\Models\Empresa\Sucursal;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -22,9 +23,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Presupuesto extends Model
 {
-    const ATENCION_TELEFONICA = 1;
+    CONST ATENCION_TELEFONICA = 1;
     CONST ATENCION_MOSTRADOR  = 2;
-    
+
     static $rules = [
     ];
 
@@ -46,6 +47,16 @@ class Presupuesto extends Model
     public function cliente(): BelongsTo
     {
         return $this->belongsTo(Cliente::class);
+    }
+
+    /**
+     * Get the sucursal that owns the Presupuesto
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function sucursal(): BelongsTo
+    {
+        return $this->belongsTo(Sucursal::class);
     }
 
 

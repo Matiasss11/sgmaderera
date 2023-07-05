@@ -83,7 +83,7 @@
 
 
         <aside class="main-sidebar sidebar-dark-blue elevation-4">
-            
+
             <a href="/home" class="brand-link">
                 <img src="{{ asset('imagenes/logo/logo.png')}}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light"><b>Maderas Ecke</b></span>
@@ -113,7 +113,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('entregas.index')}}" class="nav-link">
                                     <i class="nav-icon far fa-circle"></i>
                                     <p>Entregas</p>
                                 </a>
@@ -248,7 +248,7 @@
 
     <!--MercadoPago-->
     <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
-              
+
     <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script>
     <!-- jQuery UI 1.11.4 -->

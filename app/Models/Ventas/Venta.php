@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Venta extends Model
 {
-    
+
     static $rules = [
     ];
 
@@ -44,6 +44,20 @@ class Venta extends Model
     public function presupuesto(): HasOne
     {
         return $this->hasOne(Presupuesto::class);
+    }
+
+    public function sucursal()
+    {
+        return $this->presupuesto->sucursal->razon_social;
+    }
+
+    public function cliente()
+    {
+        if ($this->presupuesto->cliente->razon_social != null) {
+            return $this->presupuesto->cliente->razon_social;
+        } else {
+            return $this->presupuesto->cliente->nombre  + ' ' + $this->presupuesto->cliente->apellido;
+        }
     }
 
 

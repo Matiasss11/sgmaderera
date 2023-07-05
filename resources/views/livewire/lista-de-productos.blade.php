@@ -38,7 +38,7 @@
 
     {{-- Modals --}}
 
-   
+
 
     <div class="modal fade" id="modalAgregarProductos" tabindex="-1" aria-labelledby="Label" aria-hidden="true" wire:ignore>
         <div class="modal-dialog">
@@ -245,17 +245,23 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" wire:model="atencion" value="telefonica">
-                                    Atencion Telefonica
-                                </label>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" wire:model="atencion" value="telefonica">
+                                        Atencion Telefonica
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" wire:model="atencion" value="mostrador">
+                                        Atencion en Mostrador
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" wire:model="atencion" value="mostrador">
-                                    Atencion en Mostrador
-                                </label>
+                            <div class="form-group">
+                                {{ Form::label('Fecha de Entrega') }}
+                                <input type="date" wire:model="fecha_de_entrega" class="form-control" placeholder = 'Fecha de entrega'>
                             </div>
                         </div>
                     </div>

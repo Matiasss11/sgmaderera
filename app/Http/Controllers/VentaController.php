@@ -72,14 +72,14 @@ class VentaController extends Controller
         $lista = ListaDeProducto::where('presupuesto_id', $presupuesto->id)->first();
         $array = ElementosDeLista::leftJoin('productos','productos.id', 'elementos_de_lista.producto_id')
                                             ->where('lista_id', $lista->id)
-                                            ->select('elementos_de_lista.*', 
+                                            ->select('elementos_de_lista.*',
                                                     'productos.nombre as nombre',
                                                     'productos.precio_base as precio_base')
                                             ->get();
         foreach ($array as $item) {
             $elementos[] = [
-                                    'cantidad' => $item->cantidad, 
-                                    'producto_id' => $item->producto_id, 
+                                    'cantidad' => $item->cantidad,
+                                    'producto_id' => $item->producto_id,
                                     'nombre' => $item->nombre,
                                     'precio_unitario' => $item->precio_base,
                                     'precio' => $item->precio_base * $item->cantidad

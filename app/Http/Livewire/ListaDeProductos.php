@@ -9,20 +9,23 @@ use App\Models\Productos\ListaDeProducto;
 use App\Models\Ventas\Presupuesto;
 use App\Models\Productos\Producto;
 use App\Models\Sistema\Movimiento;
+use App\Models\Ventas\Entrega;
 use App\Models\Ventas\FormaPago;
 use App\Models\Ventas\Venta;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class ListaDeProductos extends Component
-{   
+{
 	// Inputs
     public $cantidad;
     public $producto_id;
     public $precio_total;
     public $stock;
     public $fecha_de_retiro;
+    public $fecha_de_entrega;
     public $cliente_id;
     public $atencion;
     public $forma_pago_id;
@@ -45,7 +48,7 @@ class ListaDeProductos extends Component
         }else {
             // Crear lista de productos
             $this->lista = new ListaDeProducto();
-        }  
+        }
     }
 
     public function render()
@@ -71,8 +74,8 @@ class ListaDeProductos extends Component
         // Cargar nuevo elemento a la lista
         if ($cargarNuevo) {
             $this->elementos[] = [
-                                    'cantidad' => $this->cantidad, 
-                                    'producto_id' => $this->producto_id, 
+                                    'cantidad' => $this->cantidad,
+                                    'producto_id' => $this->producto_id,
                                     'nombre' => $producto->nombre,
                                     'precio_unitario' => $producto->precio_base,
                                     'precio' => $producto->precio_base * $this->cantidad
@@ -111,7 +114,7 @@ class ListaDeProductos extends Component
         } else {
             $atencion = Presupuesto::ATENCION_MOSTRADOR;
         }
-        
+
         $this->guardarPresupuesto(null,$atencion,null,$cliente->id);
         return redirect()->route('presupuestos.index');
     }
@@ -119,6 +122,7 @@ class ListaDeProductos extends Component
     /** */
     public function ejecutarVenta(){
         $cliente = Cliente::find($this->cliente_id);
+        $domicilio = DB::table('domicilio_cliente')->whereCliente_id($cliente->id)->first();
         Log::info($cliente);
         if ($this->atencion == "telefonica") {
             $atencion = Presupuesto::ATENCION_TELEFONICA;
@@ -132,6 +136,15 @@ class ListaDeProductos extends Component
             'precio_total' => $this->precio_total,
             'sucursal_id'  => Auth::user()->sucursal_id,
         ]);
+
+        Entrega::create([
+            'venta_id'          => $venta->id,
+            'cliente_id'        => $cliente->id,
+            'fecha_entrega'     => $this->fecha_de_entrega,
+            'domicilio_id'      => $domicilio->id,
+            'estado_entrega_id' => Entrega::PENDIENTE,
+        ]);
+
         $this->guardarPresupuesto($venta->id, $atencion, $forma_pago->id, $cliente->id);
         $this->descontarStock($venta->id);
         $this->registrarMovimiento($venta->id);
@@ -150,10 +163,11 @@ class ListaDeProductos extends Component
         $forma_pago = FormaPago::find($this->forma_pago_id);
         $venta   = Venta::create([
             'user_id'         => Auth::user()->id,
-            'fecha_de_retiro' => $this->fecha_de_retiro, 
+            'fecha_de_retiro' => $this->fecha_de_retiro,
             'precio_total'    => $this->precio_total,
             'sucursal_id'     => Auth::user()->sucursal_id,
         ]);
+
         $this->guardarPresupuesto($venta->id, $atencion, $forma_pago->id, $cliente->id);
         $this->registrarMovimiento($venta->id);
         return redirect()->route('reservas.index');
@@ -166,8 +180,8 @@ class ListaDeProductos extends Component
         $elementos = []; $precio_total = 0;
         foreach ($lista as $item) {
             $elementos[] = [
-                        'cantidad' => $item->cantidad, 
-                        'producto_id' => $item->producto_id, 
+                        'cantidad' => $item->cantidad,
+                        'producto_id' => $item->producto_id,
                         'nombre' => $item->nombre,
                         'precio_unitario' => $item->precio_base,
                         'precio' => $item->precio_base * $item->cantidad
@@ -182,7 +196,7 @@ class ListaDeProductos extends Component
         $this->lista = ListaDeProducto::where('presupuesto_id', $this->presupuesto_id)->first();
         return ElementosDeLista::leftJoin('productos','productos.id', 'elementos_de_lista.producto_id')
                                 ->where('lista_id', $this->lista->id)
-                                ->select('elementos_de_lista.*', 
+                                ->select('elementos_de_lista.*',
                                         'productos.nombre as nombre',
                                         'productos.precio_base as precio_base',
                                         'productos.stock as stock')
@@ -234,7 +248,7 @@ class ListaDeProductos extends Component
 
         // dd($elementos);
 
-        for ($i=0; $i < count($elementos); $i++) { 
+        for ($i=0; $i < count($elementos); $i++) {
             $producto = Producto::where('id',$elementos[$i]['producto_id'])->first();
             // dd($elementos[$i]);
             $producto->stock -= $elementos[$i]['cantidad'];
